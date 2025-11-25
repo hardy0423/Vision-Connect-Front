@@ -1,0 +1,43 @@
+<div
+  class="flex items-center justify-between text-sm font-medium text-center bg-gray-100 text-gray-500 border-b border-x-custom-gray"
+>
+  <ul class="flex flex-wrap -mb-px">
+    <li class="mr-2">
+      <div
+        (click)="setActiveTab('UTILISATEURS')"
+        [ngClass]="
+          isActive('UTILISATEURS')
+            ? 'text-primary border-primary'
+            : 'border-transparent'
+        "
+        class="inline-block p-4 border-b-2 rounded-t-lg hover:text-custom-gray hover:border-primary cursor-pointer uppercase"
+      >
+      {{ "menu.utilisateur" | translate }}
+      </div>
+    </li>
+    <li class="mr-2">
+      <div
+        (click)="setActiveTab('ENTREPRISES')"
+        [ngClass]="
+          isActive('ENTREPRISES')
+            ? 'text-primary border-primary'
+            : 'border-transparent'
+        "
+        class="inline-block p-4 border-b-2 rounded-t-lg hover:text-custom-gray hover:border-primary cursor-pointer uppercase"
+      >
+      {{ "menu.entreprise" | translate }}
+      </div>
+    </li>
+
+  </ul>
+  
+</div>
+
+<div class="p-4 w-full">
+  <div *ngIf="isActive('ENTREPRISES')">
+    <app-company-table />
+  </div>
+  <div *ngIf="isActive('UTILISATEURS')">
+    <app-user-table />
+  </div>
+</div>

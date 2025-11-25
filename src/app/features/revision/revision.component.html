@@ -1,0 +1,51 @@
+<mat-card-content style="display: flex;" class="review-content">
+  <mat-card class="info-card" style="flex: 1;">
+    <div class="device">
+
+      <mat-card-title class="mat-card-title">{{
+        "device.device_info" | translate
+      }}</mat-card-title>
+        <div class="info-item">
+          <strong>{{ "device.device_name_revision" | translate }} :</strong>
+          {{ deviceData?.name }}
+        </div>
+        <div class="info-item">
+          <strong>{{ "device.device_type" | translate }} :</strong>
+          {{ typeNameDevice }}
+        </div>
+  
+        <div class="info-item">
+          <strong>{{ "device.device_company_name" | translate }} :</strong>
+          {{ companyNameDevice }}
+        </div>
+  
+        <div class="info-item">
+          <strong> {{ "device.IMEI" | translate }} :</strong>
+          {{ deviceData?.imei }}
+        </div>
+        <div class="info-item">
+          <strong>{{ "device.device_phone" | translate }} :</strong>
+          {{ deviceData?.sim_number }}
+        </div>
+        <div class="info-item">
+          <strong>{{ "device.status" | translate }} :</strong>
+          {{ deviceData?.status ? "Active" : "Inactive" }}
+        </div>
+    </div>
+    <div class="zone">
+      <mat-card-title class="mat-card-title">Zone d'intervention</mat-card-title>
+      <div class="info-item">
+        <strong>{{ "map.zone_name" | translate }} :</strong>
+        {{ interventionZoneName }}
+      </div>
+    </div>
+  </mat-card>
+
+  <!-- Colonne pour les informations de la zone d'intervention -->
+
+  <mat-card class="zone-card" style="flex: 1;padding: 0px !important;">
+    <div style="height: 70vh; overflow: initial" class="div-upload" appDnd>
+      <div #ol_map_revision id="ol_map_revision" class="map-review"></div>
+    </div>
+  </mat-card>
+</mat-card-content>

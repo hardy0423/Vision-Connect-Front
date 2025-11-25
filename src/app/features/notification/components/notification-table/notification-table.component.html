@@ -1,0 +1,156 @@
+<div class="container mx-auto py-6 max-w-6xl">
+  <h1 style="font-size: 20px" class="text-custom-gray ml-5">
+    {{ "notification.notification_list" | translate }}
+  </h1>
+
+  <div class="flex flex-wrap gap-4 mb-6 items-end">
+    <mat-form-field appearance="fill" class="flex-1 min-w-[200px]">
+      <mat-label>{{ "notification.typeLabel" | translate }}</mat-label>
+      <mat-select [(value)]="selectedType" (selectionChange)="applyFilters()">
+        <mat-option value="all">{{
+          "notification.typeAll" | translate
+        }}</mat-option>
+        <mat-option value="Critique">{{
+          "notification.typeCritique" | translate
+        }}</mat-option>
+        <mat-option value="Élevé">{{
+          "notification.typeEleve" | translate
+        }}</mat-option>
+        <mat-option value="Moyen">{{
+          "notification.typeMoyen" | translate
+        }}</mat-option>
+        <mat-option value="Faible">{{
+          "notification.typeFaible" | translate
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="flex-1 min-w-[200px]">
+      <mat-label>{{ "notification.dateLabel" | translate }}</mat-label>
+      <input
+        matInput
+        [matDatepicker]="datePicker"
+        (dateChange)="applyFilters()"
+        [(ngModel)]="selectedDate"
+      />
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="datePicker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #datePicker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="flex-1 min-w-[200px]">
+      <mat-label>{{ "notification.deviceLabel" | translate }}</mat-label>
+      <mat-select
+        [(ngModel)]="selectedDevice"
+        (selectionChange)="applyFilters()"
+      >
+        <ng-container *ngIf="listDevice$ | async as listDevice">
+          <mat-option *ngIf="listDevice.length > 0" [value]="''">
+            {{ "notification.deviceAll" | translate }}
+          </mat-option>
+
+          <mat-option *ngFor="let device of listDevice" [value]="device.name">
+            <mat-icon class="mr-2">directions_car</mat-icon> {{ device.name }}
+          </mat-option>
+
+          <mat-option *ngIf="listDevice.length === 0" disabled>
+            {{ "notification.noDeviceAdded" | translate }}
+          </mat-option>
+        </ng-container>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-stroked-button (click)="resetFilters()" color="primary">
+      {{ "notification.reset" | translate }}
+    </button>
+  </div>
+
+  <div class="grid gap-4 mb-6">
+    @if (isLoading) {
+    <div class="flex justify-center p-4">
+      <mat-spinner diameter="40"></mat-spinner>
+    </div>
+    } @else {
+    <ng-container *ngIf="filteredNotifications.length > 0; else noResults">
+      <div
+        *ngFor="let notification of filteredNotifications"
+        class="p-4 rounded-lg shadow-sm transition-transform hover:-translate-y-0.5 hover:shadow-md"
+        [ngClass]="{
+          'border-l-4': true,
+          'border-redscale': notification.notification_type === 'Critique',
+          'border-orange-500': notification.notification_type === 'Élevé',
+          'border-yellow-500': notification.notification_type === 'Moyen',
+          'border-custom-gray': notification.notification_type === 'Faible',
+          'bg-redscale/5': notification.notification_type === 'Critique',
+          'bg-orange-500/5': notification.notification_type === 'Élevé',
+          'bg-yellow-500/5': notification.notification_type === 'Moyen',
+          'bg-custom-gray/5': notification.notification_type === 'Faible'
+        }"
+      >
+        <div class="flex justify-between items-center mb-3">
+          <span
+            class="px-2 py-1 rounded-full text-xs font-medium uppercase"
+            [ngClass]="{
+              'bg-redscale text-white':
+                notification.notification_type === 'Critique',
+              'bg-orange-500 text-white':
+                notification.notification_type === 'Élevé',
+              'bg-yellow-500 text-white':
+                notification.notification_type === 'Moyen',
+              'bg-custom-gray text-white':
+                notification.notification_type === 'Faible'
+            }"
+          >
+            {{ notification.notification_type }}
+          </span>
+          <span class="text-xs text-custom-gray">
+            {{
+              notification.created_at
+                | date : "dd MMMM yyyy à HH:mm" : "" : "fr"
+            }}
+          </span>
+        </div>
+
+        <div class="mb-3">
+          <p class="text-custom-black m-0">{{ notification.message }}</p>
+        </div>
+
+        <div class="flex justify-between items-center text-xs text-custom-gray">
+          <span class="font-medium">{{
+            extractDeviceName(notification.message)
+          }}</span>
+          <button
+            mat-icon-button
+            (click)="markAsRead(notification.uid)"
+            *ngIf="!notification.read && !isAdminOrSuperUser"
+            [matTooltip]="'notification.markAsRead' | translate"
+          >
+            <mat-icon class="text-gray">mark_email_read</mat-icon>
+          </button>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-template #noResults>
+      <div class="text-center py-10 text-gray">
+        <mat-icon class="text-5xl mb-4">notifications_off</mat-icon>
+        <p class="text-base m-0">
+          {{ "notification.noResultsMessage" | translate }}
+        </p>
+      </div>
+    </ng-template>
+    }
+  </div>
+
+  <mat-paginator
+    *ngIf="totalCount > 0"
+    [length]="totalCount"
+    [pageSize]="limit"
+    [pageSizeOptions]="[10, 25, 50, 100]"
+    (page)="onPageChange($event)"
+    aria-label="Select page"
+    class="mt-6"
+  ></mat-paginator>
+</div>

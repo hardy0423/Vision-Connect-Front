@@ -1,0 +1,95 @@
+<form [formGroup]="deviceFormGroup">
+  <!-- Section de configuration de l'appareil -->
+  <div class="device-configuration">
+    <h3>{{ "device.device_config" | translate }}</h3>
+    <div class="config-item">
+      <span class="config-label">
+        {{ "device.device_name_hote" | translate }} :</span
+      >
+      <span class="config-value">{{
+        deviceData.hostname || "vision-preprod.futurmap.net"
+      }}</span>
+    </div>
+    <div class="config-item">
+      <span class="config-label">{{ "device.adress_ip" | translate }} :</span>
+      <span class="config-value">{{
+        deviceData.ipAddress || "000.000.000.000"
+      }}</span>
+    </div>
+    <div class="config-item">
+      <span class="config-label"> {{ "device.port" | translate }} :</span>
+      <span class="config-value">{{ deviceData.port || "5023" }}</span>
+    </div>
+  </div>
+
+  <!-- Conteneur de grille pour les champs -->
+  <div class="form-grid">
+    <mat-form-field appearance="fill">
+      <mat-label>{{ "device.car_name" | translate }}</mat-label>
+      <input matInput placeholder="Immatriculation" formControlName="car_name" />
+      <mat-error *ngIf="deviceFormGroup.get('car_name')?.hasError('required')">
+        {{ "device.error.error_name_car" | translate }}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>{{ "device.device_name" | translate }}</mat-label>
+      <input matInput placeholder="Nom de l'appareil" formControlName="name" />
+      <mat-error *ngIf="deviceFormGroup.get('name')?.hasError('required')">
+        {{ "device.error.error_name_device" | translate }}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>{{ "device.device_type" | translate }}</mat-label>
+      <mat-select
+        formControlName="type"
+        (selectionChange)="onDeviceTypeChange($event.value)"
+        required
+      >
+        <mat-option *ngFor="let type of deviceTypes" [value]="type.uid">
+          {{ type.product }} {{ type.name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="deviceFormGroup.get('type')?.hasError('required')">
+        {{ "device.error.error_type_device" | translate }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>{{ "device.IMEI" | translate }}</mat-label>
+      <input
+        matInput
+        placeholder="IMEI"
+        formControlName="imei"
+        pattern="[0-9]{15,16}"
+        required
+      />
+      <mat-error *ngIf="deviceFormGroup.get('imei')?.hasError('required')">
+        {{ "device.error.error_imei_requis" | translate }}
+      </mat-error>
+      <mat-error *ngIf="deviceFormGroup.get('imei')?.hasError('pattern')">
+        {{ "device.error.error_imei_length" | translate }}
+      </mat-error>
+      <mat-error *ngIf="deviceFormGroup.get('imei')?.hasError('imeiExists')">
+        {{ "device.error.error_imei_exist" | translate }}
+      </mat-error>
+    </mat-form-field>
+
+    <ngx-material-intl-tel-input
+      fieldControlName="sim_number"
+      [textLabels]="frenchTextLabels"
+      (currentValue)="getValue($event)"
+      [required]="true"
+    ></ngx-material-intl-tel-input>
+  </div>
+  <div class="step-navigation">
+    <button
+      [disabled]="!deviceFormGroup.valid"
+      mat-stroked-button
+      matStepperNext
+      color="primary"
+      (click)="saveDeviceData()"
+    >
+      {{ "map.suivant" | translate }}
+    </button>
+  </div>
+</form>

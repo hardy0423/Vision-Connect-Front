@@ -1,0 +1,79 @@
+
+
+<ng-container *ngFor="let item of menuItems">
+  <ng-container *ngIf="company.is_actif; else disabledTemplate">
+    <li class="text-custom-gray">
+      <details class="group">
+        <summary
+          class="flex items-center justify-between gap-4 p-2 font-medium marker:content-none hover:cursor-pointer text-custom-gray hover:text-primary"
+        >
+          <span class="flex items-center gap-3 w-full">
+            <ng-container *ngIf="company.logo; else defaultIcon">
+              <img
+                [src]="
+                  company.logo
+                    ? APIURL + company.logo
+                    : 'assets/img/company.png'
+                "
+                alt="Logo de {{ company?.name }}"
+                class="w-10 h-10 rounded-full object-cover border border-gray-300 shadow-sm"
+              />
+            </ng-container>
+            <ng-template #defaultIcon>
+              <img
+                [src]="'assets/svg/company.svg'"
+                alt="Logo de {{ company?.name }}"
+                class="w-10 h-10 rounded-full object-cover border border-gray-300 shadow-sm"
+              />
+            </ng-template>
+            <span class="text-base truncate">{{ company.name }}</span>
+          </span>
+          <svg
+            class="w-5 h-5 text-primary hover:text-white transition-transform duration-300 transform group-open:rotate-90"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            viewBox="0 0 16 16"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"
+            ></path>
+          </svg>
+        </summary>
+
+        <article *ngIf="item.children" class="px-4 pb-4">
+          <ul class="flex flex-col gap-4 pl-2 mt-4">
+            <li
+              *ngFor="let child of item.children"
+              class="flex gap-2 hover:text-primary"
+            >
+              <a
+                [routerLink]="[child.link, company.uid]"
+                class="flex gap-2"
+                routerLinkActive="text-primary hover:text-gray-500"
+              >
+                <svg
+                  [attr.xmlns]="'http://www.w3.org/2000/svg'"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-6 h-6 text-redscale"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    [attr.d]="child.icon"
+                  ></path>
+                </svg>
+                {{ child.label }}
+              </a>
+            </li>
+          </ul>
+        </article>
+      </details>
+    </li>
+  </ng-container>
+  <ng-template #disabledTemplate>
+  </ng-template>
+</ng-container>

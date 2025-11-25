@@ -1,0 +1,8 @@
+<form [formGroup]="formPhoneNumberGroup">
+<ngx-material-intl-tel-input
+  formControlName="phone"
+  [textLabels]="frenchTextLabels"
+  (currentValue)="getValue($event)"
+  [required]=true
+></ngx-material-intl-tel-input>
+</form>

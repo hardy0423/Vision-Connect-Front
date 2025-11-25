@@ -1,0 +1,56 @@
+<mat-dialog-content
+  class="rounded-xl bg-white p-8 shadow-xl max-w-md w-full mx-auto"
+>
+  <h2 class="text-2xl font-semibold text-gray-800 text-center mb-6">
+    {{ "company.logo.update" | translate }}
+  </h2>
+
+  <!-- Upload input -->
+  <input
+    id="fileInput"
+    type="file"
+    (change)="onFileSelected($event)"
+    accept="image/*"
+    class="hidden"
+  />
+
+  <!-- Upload button -->
+  <label
+    for="fileInput"
+    class="flex items-center justify-center w-full bg-purplescale text-white py-2 px-4 rounded-md cursor-pointer hover:bg-purplescale/90 transition mb-4"
+  >
+    <mat-icon class="mr-2">file_upload</mat-icon>
+    {{ "company.logo.select_file" | translate }}
+  </label>
+
+  <!-- Image preview -->
+  <div
+    class="flex justify-center items-center mb-6"
+    *ngIf="selectedImage"
+  >
+    <img
+      [src]="selectedImage"
+      alt="Aperçu"
+      class="w-28 h-28 rounded-full object-cover border border-gray-300 shadow"
+    />
+  </div>
+
+  <!-- Action buttons -->
+  <div class="flex justify-end space-x-3">
+    <button
+      mat-stroked-button
+      color="warn"
+      (click)="closeImageModal()"
+    >
+      {{ "company.logo.reset" | translate }}
+    </button>
+    <button
+      mat-stroked-button
+      color="primary"
+      [disabled]="!selectedImage"
+      (click)="saveImage()"
+    >
+      {{ "company.logo.save" | translate }}
+    </button>
+  </div>
+</mat-dialog-content>

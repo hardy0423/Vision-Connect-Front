@@ -1,0 +1,52 @@
+.form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  flex: content; // Prend tout l'espace disponible
+
+  .cancel-button {
+    background-color: #e94e77; // Couleur de fond du bouton "Back"
+    color: #fff; // Couleur du texte
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Ombre douce
+
+    &:hover {
+      background-color: #c73d60; // Couleur de fond au survol
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); // Ombre au survol
+    }
+  }
+  .save-button {
+    background-color: #4a90e2; // Couleur de fond du bouton "Next"
+    color: #fff; // Couleur du texte
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Ombre douce
+
+    &:hover {
+      background-color: #357abd; // Couleur de fond au survol
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); // Ombre au survol
+    }
+  }
+}
+.mat-dialog-title {
+  display: flex;
+  align-items: center; /* Centre verticalement le texte et le bouton */
+  justify-content: center; /* Centre horizontalement le texte */
+  position: relative; /* Nécessaire pour positionner le bouton de fermeture */
+  padding: 0 60px; /* Ajustez selon les besoins pour le padding latéral */
+  height: 60px; /* Ajustez selon la hauteur souhaitée */
+}
+
+.close-button {
+  position: absolute;
+  right: 16px; /* Place le bouton tout à gauche */
+  top: 50%; /* Positionne le bouton verticalement au centre */
+  transform: translateY(-50%); /* Centre verticalement le bouton */
+  padding: 0;
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center; /* Centre l  e contenu du bouton verticalement */
+}
+
+.close-button mat-icon {
+  font-size: 24px; /* Ajustez la taille de l'icône si nécessaire */
+  color: rgba(0, 0, 0, 0.54); /* Couleur par défaut de l'icône */
+}

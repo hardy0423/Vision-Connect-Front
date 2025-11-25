@@ -1,0 +1,77 @@
+.mat-dialog-title {
+  position: relative;
+}
+
+.close-button {
+  position: absolute;
+  // top: 1;
+  right: 0;
+  margin: 1px;
+  padding: 0;
+  background: transparent;
+  border: none;
+}
+
+.close-button mat-icon {
+  font-size: 24px; /* Ajustez la taille de l'icône si nécessaire */
+  color: rgba(0, 0, 0, 0.54); /* Couleur par défaut de l'icône */
+}
+
+.name-form {
+  min-width: 100px;
+  max-width: 400px;
+  width: 100%;
+}
+
+
+.full-width {
+  width: 100%;
+}
+
+.form-draw {
+  display: flex;
+  justify-content: space-between;
+}
+
+.zone-select {
+  min-width: 100px;
+  max-width: 400px;
+  width: 100%;
+}
+
+.form-draw-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.left-section {
+  flex: 1;
+}
+
+.center-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #a1d016;
+}
+
+.right-section {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.info-icon {
+  margin-right: 8px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.step-navigation {
+  margin-bottom: 0px;
+}

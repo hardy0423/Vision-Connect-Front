@@ -1,0 +1,40 @@
+.header-modal {
+    display: flex;
+    margin-right: 10px;
+    flex-direction: row;
+    justify-content: space-between;
+    font-family: "Gill Sans", sans-serif;
+    align-items: center;
+    height: 45px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+    button {
+        width: 100px;
+        margin: 0 10px 0 10px;
+
+        &.btn_cancel {
+            background-color: #ff0000ad;
+            color: #fff;
+        }
+
+        &.btn_valid {
+            background-color: #026d1fb8;
+            color: #fff;
+        }
+
+        &.btn_cancel:hover {
+            background-color: #ff0000d7;
+            color: #fff;
+        }
+
+        &.btn_valid:hover {
+            background-color: #00a32bd0;
+            color: #fff;
+        }
+    }
+}

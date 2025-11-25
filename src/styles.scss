@@ -1,0 +1,312 @@
+/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "ag-grid-community/styles/ag-grid.css";
+@import "ag-grid-community/styles/ag-theme-quartz.css";
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
+@import "maplibre-gl/dist/maplibre-gl.css";
+@import "@maplibre/maplibre-gl-geocoder/dist/maplibre-gl-geocoder.css";
+@import "maplibre-gl/dist/maplibre-gl.css";
+@import "mapbox-gl/dist/mapbox-gl.css";
+@import "@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css";
+
+
+
+
+// @import "@cds/core/global.min.css";
+// @import "@clr/ui/clr-ui.min.css";
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+// Style du dialogue
+.mat-dialog-content {
+  max-width: 70vw; // Réduit la largeur maximale du dialogue
+  padding: 16px;
+}
+
+// Style pour le titre du dialogue
+.mat-dialog-title {
+  font-size: 24px; // Taille du texte
+  font-weight: 600; // Épaisseur du texte
+  color: #333; // Couleur du texte
+  text-align: center; // Centre le texte
+  margin: 0; // Supprime la marge par défaut
+  padding: 10px 0; // Espacement au-dessus et en dessous du titre
+  border-bottom: 2px solid #4a90e2; // Bordure inférieure colorée
+  background-color: #f5f5f5; // Couleur de fond douce
+  border-radius: 8px 8px 0 0; // Coins arrondis en haut
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Ombre légère sous le titre
+}
+
+// Conteneur principal du formulaire et de l'image
+.form-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px; // Espacement entre le formulaire et l'image
+
+  // Conteneur pour le formulaire
+  form {
+    flex: 1; // Prend tout l'espace disponible
+    max-width: 400px; // Largeur maximale du formulaire
+  }
+
+  // Conteneur pour l'image
+  .maps-container {
+    flex: 1; // Prend tout l'espace restant
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
+    overflow: hidden; // Assure que l'image ne dépasse pas le conteneur
+    border: 3px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+}
+
+
+
+// Grille pour les champs du formulaire
+.form-grid {
+  display: grid;
+  // grid-template-columns: repeat(2, 1fr); // Pour rendre en 2 colonne
+  grid-template-columns: 1fr;
+  gap: 1px; // Espacement entre les champs
+}
+
+
+.mat-stepper-next {
+  background-color: white; // Couleur de fond du bouton "Next"
+  color: #357abd; // Couleur du texte
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Ombre douce
+  border-color: #357abd;
+
+  &:hover {
+    // background-color: #357abd; // Couleur de fond au survol
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); // Ombre au survol
+  }
+}
+
+
+
+.mat-stepper-previous {
+  background-color: white; // Couleur de fond du bouton "Next"
+  color: #357abd; // Couleur du texte
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Ombre douce
+  border-color: #357abd;
+  &:hover {
+    // background-color: #c73d60; // Couleur de fond au survol
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); // Ombre au survol
+  }
+}
+
+// Style pour les boutons "Next" et "Back"
+.step-navigation {
+  display: flex;
+  justify-content: space-between; // Espace entre les boutons
+  margin-top: 10px; // Espacement au-dessus des boutons
+
+  button.mat-button {
+    font-weight: bold;
+    border-radius: 4px;
+    padding: 10px 16px;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    border: none;
+
+    &.mat-stepper-next {
+      background-color: #4a90e2; // Couleur de fond du bouton "Next"
+      color: #fff; // Couleur du texte
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Ombre douce
+
+      &:hover {
+        background-color: #357abd; // Couleur de fond au survol
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); // Ombre au survol
+      }
+    }
+
+    &.mat-stepper-previous {
+      background-color: #e94e77; // Couleur de fond du bouton "Back"
+      color: #fff; // Couleur du texte
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Ombre douce
+
+      &:hover {
+        background-color: #c73d60; // Couleur de fond au survol
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); // Ombre au survol
+      }
+    }
+  }
+}
+
+// Étape du stepper
+mat-step {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  .mat-step-label {
+    font-size: 16px; // Réduit la taille du label
+    font-weight: bold;
+    color: #4a90e2;
+  }
+}
+
+// Conteneur de la carte Google Maps
+.map-container {
+  margin: 16px 0;
+  border: 3px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  margin-top: -5px;
+}
+
+// Mise en forme des labels et des champs d'entrée
+// mat-form-field {
+//   margin-bottom: 1px; // Réduit la marge en bas des champs
+
+//   .mat-form-field-label {
+//     color: #555;
+//     font-weight: bold;
+//   }
+
+//   .mat-form-field-outline {
+//     color: #aaa;
+//   }
+
+//   .mat-form-field-underline {
+//     background-color: #333;
+//   }
+
+//   .mat-form-field-ripple {
+//     background-color: #555;
+//   }
+
+//   // Définir la hauteur uniforme des champs
+//   .mat-form-field-infix {
+//     height: 48px; // Réduit la hauteur des champs
+//   }
+// }
+
+// Styles pour les boutons
+button.mat-button {
+  background-color: #4a90e2;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 4px;
+  padding: 8px 16px; // Réduit le padding
+  text-transform: uppercase;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #357abd;
+  }
+
+  &.mat-stepper-next {
+    margin-top: 16px;
+    justify-self: end;
+  }
+
+  &.mat-stepper-previous {
+    margin-top: 16px;
+    justify-self: start;
+  }
+}
+
+// Style pour le champ mot de passe avec bouton de copie
+.password-field {
+  position: relative;
+}
+
+.copy-button {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: transparent;
+
+  mat-icon {
+    font-size: 1.2rem;
+  }
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+}
+
+// Style pour la configuration de l'appareil
+.device-configuration {
+  margin-bottom: 16px;
+  padding: 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f5f5f5;
+
+  h3 {
+    margin-top: 0;
+    color: #333;
+  }
+
+  .config-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #ddd;
+
+    .config-label {
+      font-weight: bold;
+      color: #555;
+    }
+
+    .config-value {
+      color: #333;
+    }
+  }
+
+  p {
+    margin: 8px 0;
+    color: #666;
+  }
+}
+
+@media (max-width: 600px) {
+  .mat-dialog-title {
+    font-size: 20px; // Ajuste la taille du titre pour les petits écrans
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr; // Une seule colonne sur les petits écrans
+  }
+
+  .map-container {
+    height: 200px; // Ajuste la hauteur de la carte pour les petits écrans
+  }
+}
+
+
+.mat-mdc-dialog-content {
+  max-height: unset !important; /* Cela supprime la limite de hauteur */
+}
+
+.dialogWithNoPadding {
+  mat-dialog-container {
+    padding: 0px !important;
+    border-radius: 0px !important;
+  }
+}
+
+
+.dialogWithNoContentPadding {
+  .mat-dialog-content {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+}

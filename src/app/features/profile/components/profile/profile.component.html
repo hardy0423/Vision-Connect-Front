@@ -1,0 +1,145 @@
+<div class="p-6 bg-white rounded-lg shadow-lg">
+  <h2 class="text-xl text-center font-bold mb-4">
+    {{
+      isAdministrator
+        ? ("accounts.modal.title_admin" | translate)
+        : ("accounts.modal.title" | translate)
+    }}
+  </h2>
+  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+    <div class="space-y-4">
+      <!-- Name Field -->
+      <mat-form-field class="w-full" appearance="fill">
+        <mat-label>{{
+          "accounts.modal.fields.first_name" | translate
+        }}</mat-label>
+        <input
+          matInput
+          placeholder="{{
+            'accounts.modal.fields.firstName_placeholder' | translate
+          }}"
+          formControlName="first_name"
+        />
+      </mat-form-field>
+
+      <!-- Name Field -->
+      <mat-form-field class="w-full" appearance="fill">
+        <mat-label>{{
+          "accounts.modal.fields.last_name" | translate
+        }}</mat-label>
+        <input
+          matInput
+          placeholder="{{
+            'accounts.modal.fields.lastName_placeholder' | translate
+          }}"
+          formControlName="last_name"
+        />
+      </mat-form-field>
+
+      <!-- Email Field -->
+      <mat-form-field class="w-full" appearance="fill">
+        <mat-label>{{ "accounts.modal.fields.email" | translate }}</mat-label>
+        <input
+          matInput
+          type="email"
+          placeholder="{{
+            'accounts.modal.fields.email_placeholder' | translate
+          }}"
+          formControlName="email"
+        />
+      </mat-form-field>
+
+      <!-- Password Toggle Link -->
+      <p
+        class="text-sm text-blue-600 cursor-pointer hover:underline"
+        (click)="togglePasswordFields()"
+      >
+        @if (isPasswordUpdate) {
+        {{ "accounts.modal.password.link_reset" | translate }}
+        } @else {
+        {{ "accounts.modal.password.link" | translate }}
+        }
+      </p>
+
+      <!-- Password Fields -->
+      <div *ngIf="showPasswordFields" class="space-y-4">
+        <!-- Current Password -->
+        <mat-form-field class="w-full" appearance="fill">
+          <mat-label>{{
+            "accounts.modal.password.current_password" | translate
+          }}</mat-label>
+          <input
+            matInput
+            type="password"
+            placeholder="{{
+              'accounts.modal.password.current_password_placeholder' | translate
+            }}"
+            formControlName="currentPassword"
+            autocomplete="off"
+          />
+        </mat-form-field>
+
+        <!-- New Password -->
+        <mat-form-field class="w-full" appearance="fill">
+          <mat-label>{{
+            "accounts.modal.password.new_password" | translate
+          }}</mat-label>
+          <input
+            matInput
+            type="password"
+            placeholder="{{
+              'accounts.modal.password.new_password_placeholder' | translate
+            }}"
+            formControlName="newPassword"
+          />
+          <!-- Error Message -->
+          <mat-error
+            *ngIf="profileForm.get('newPassword')?.hasError('minlength')"
+          >
+            {{ "accounts.modal.password.error_minlength" | translate }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Confirm Password -->
+        <mat-form-field class="w-full" appearance="fill">
+          <mat-label>{{
+            "accounts.modal.password.confirm_password" | translate
+          }}</mat-label>
+          <input
+            matInput
+            type="password"
+            placeholder="{{
+              'accounts.modal.password.confirm_password_placeholder' | translate
+            }}"
+            formControlName="confirmPassword"
+          />
+        </mat-form-field>
+
+        <!-- Password Match Error -->
+        <div *ngIf="passwordMismatch" class="text-red-500 text-sm">
+          {{ "accounts.modal.password.error_mismatch" | translate }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Buttons -->
+    <div class="flex justify-end space-x-2 mt-6">
+      <button
+        type="button"
+        (click)="onCancel()"
+        mat-stroked-button
+        color="warn"
+      >
+        {{ "accounts.modal.buttons.cancel" | translate }}
+      </button>
+      <button
+        [disabled]="isSaveDisabled() || profileForm.invalid"
+        type="submit"
+        mat-stroked-button
+        color="primary"
+      >
+        {{ "accounts.modal.buttons.save" | translate }}
+      </button>
+    </div>
+  </form>
+</div>

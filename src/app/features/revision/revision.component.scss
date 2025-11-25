@@ -1,0 +1,56 @@
+mat-grid-tile {
+    background: lightblue;
+  }
+
+
+  .info-card, .zone-card {
+    padding: 15px;
+    margin: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+  
+  .mat-card-title {
+    font-size: 1.4rem;
+    color: #3a54e8;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  .mat-card-title {
+    font-size: 22px;
+    font-weight: bold;
+    color: #2196f3;
+    text-transform: uppercase;
+  }
+  
+  
+  .info-item {
+    padding: 5px;
+    font-size: 1rem;
+    color: #424242;
+    margin: 5px 0;
+  }
+  
+  strong {
+    font-weight: bold;
+    color: #333;
+  }
+  
+
+  .map-review {
+    height: 100%;
+    width: 100%;
+    position: relative;
+  }
+
+  .device .zone {
+    margin: 6px;
+  }
+
+  .review-content {
+    padding-top: 2px;
+
+  }
+  

@@ -1,0 +1,95 @@
+
+<div>
+  <form [formGroup]="reportFormGroup!">
+    <div class="p-6 space-y-6 bg-white rounded-lg shadow-lg">
+      <!-- Section Appareils -->
+      <div>
+
+        <div class="flex items-center justify-between">
+          <h4 class="text-2xl font-semibold text-gray-700">
+            {{ "report.devicePlaceholder" | translate }}
+          </h4>
+  
+          <button
+          mat-icon-button
+          (click)="closeModal()"
+          class="group flex h-10 w-10 cursor-pointer items-center justify-center rounded-3xl bg-white hover:bg-slate-200"
+        >
+          <div class="relative w-6 h-6">
+            <span
+              class="block h-1 w-8 origin-center rounded-full bg-custom-gray absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rotate-45"
+            ></span>
+            <span
+              class="block h-1 w-8 origin-center rounded-full bg-primary absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 -rotate-45"
+            ></span>
+          </div>
+        </button>
+        </div>
+
+
+      
+        <mat-form-field class="w-full">
+          <mat-label class="text-sm text-gray-500">
+            {{ "report.chooseDevice" | translate }}
+          </mat-label>
+          <mat-select formControlName="selectedDevice" class="w-full">
+            <ng-container *ngIf="listDevice$ | async as listDevice">
+              <ng-container *ngIf="listDevice.length > 0; else noDevice">
+                <mat-option *ngFor="let device of listDevice" [value]="device.uid">
+                  <mat-icon>directions_car</mat-icon> {{ device.name }}
+                </mat-option>
+              </ng-container>
+              <ng-template #noDevice>
+                <mat-option [value]="null" disabled>
+                  {{ "report.noDevice" | translate }}
+                </mat-option>
+              </ng-template>
+            </ng-container>
+          </mat-select>          
+        </mat-form-field>
+      </div>
+
+      <!-- Section Période -->
+      <div>
+        <h4 class="text-2xl font-semibold text-gray-700">
+          {{ "report.period" | translate }}
+        </h4>
+        <mat-card class="calendar-card w-full p-4 shadow-md">
+          <mat-calendar
+            [(selected)]="selectedDate"
+            [dateFilter]="disableFutureDates"
+            class="w-full h-full"
+          ></mat-calendar>
+        </mat-card>
+      </div>
+
+      <!-- Intervention Zone -->
+      <div class="flex items-center justify-between">
+        <h4 class="text-lg font-semibold text-gray-700">
+          {{ "report.intervention_zone" | translate }}
+        </h4>
+        <mat-slide-toggle
+          class="toggle-margin"
+          [checked]="checked"
+          [disabled]="disabled"
+          (change)="onToggleChange($event)"
+          color="primary"
+        >
+        </mat-slide-toggle>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="mt-6 flex justify-center">
+        <button
+          mat-button
+          [disabled]="!reportFormGroup?.valid || !selectedDate"
+          (click)="reportDetail()"
+          class="btn bg-custom-gray hover:bg-primary text-white flex items-center gap-2 px-6 py-3 rounded-lg shadow-md transition-all duration-300"
+        >
+          <mat-icon>visibility</mat-icon>
+          {{ "report.viewTrip" | translate }}
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

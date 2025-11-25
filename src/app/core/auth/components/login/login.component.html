@@ -1,0 +1,155 @@
+<div
+  class="w-screen min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8"
+  style="
+    background: linear-gradient(
+        to bottom,
+        rgba(36, 127, 237, 0.95),
+        rgba(107, 104, 104, 0.9)
+      ),
+      url('assets/img/background.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: overlay;
+  "
+>
+  <div
+    class="relative py-10 sm:max-w-md sm:mx-auto bg-white/10 backdrop-blur-md shadow-2xl rounded-2xl px-8 border border-white/20"
+  >
+    <form
+      [formGroup]="loginForm"
+      class="min-h-96 px-6 py-6 text-left rounded-2xl"
+      (ngSubmit)="submitForms()"
+    >
+      <div class="flex flex-col justify-center items-center h-full select-none">
+        <div class="flex flex-col items-center gap-4 mb-8">
+          <img src="assets/img/lg.png" class="w-50" alt="Logo" />
+          <p class="text-xl font-bold text-white drop-shadow">
+            {{ "accounts.login.titre_connection" | translate }}
+          </p>
+          <span class="text-sm text-white text-center max-w-sm">
+            {{ "accounts.login.description" | translate }}
+          </span>
+        </div>
+
+        <!-- Identifiant -->
+        <div class="w-full flex flex-col gap-2">
+          <label for="username" class="font-medium text-sm text-white">
+            {{ "accounts.login.input.identifiant" | translate }}
+          </label>
+          <input
+            type="text"
+            id="username"
+            (input)="trimUsername()"
+            formControlName="username"
+            class="border border-gray-600 bg-white/90 rounded-md px-4 py-3 text-base w-full focus:outline-none focus:ring-2 focus:ring-primary placeholder-gray-500"
+            placeholder="{{ 'accounts.login.input.placeholder' | translate }}"
+          />
+          <div
+            *ngIf="
+              loginForm.get('username')?.invalid &&
+              loginForm.get('username')?.touched
+            "
+            class="text-secondary text-sm mt-1"
+          >
+            <span *ngIf="loginForm.get('username')?.hasError('required')">
+              {{ "accounts.login.alert.error_identifiant" | translate }}
+            </span>
+          </div>
+        </div>
+
+        <!-- Mot de passe -->
+        <div class="w-full flex flex-col gap-2 mt-6">
+          <label for="password" class="font-medium text-sm text-white">
+            {{ "accounts.password_change.password_1" | translate }}
+          </label>
+          <div class="relative">
+            <input
+              [type]="passwordVisible ? 'text' : 'password'"
+              id="password"
+              formControlName="password"
+              class="border border-gray-600 bg-white/90 rounded-md px-4 py-3 text-base w-full focus:outline-none focus:ring-2 focus:ring-primary placeholder-gray-500"
+              placeholder="{{
+                'accounts.password_change.placeholder_ps1' | translate
+              }}"
+            />
+            <div
+              *ngIf="
+                loginForm.get('password')?.invalid &&
+                loginForm.get('password')?.touched
+              "
+              class="text-secondary text-sm mt-1"
+            >
+              <span *ngIf="loginForm.get('password')?.hasError('required')">
+                {{ "accounts.login.input.password.message1" | translate }}
+              </span>
+            </div>
+            <button
+              type="button"
+              (click)="togglePasswordVisibility()"
+              class="absolute right-3 top-6 transform -translate-y-1/2 text-gray-600"
+            >
+              <i
+                [class]="passwordVisible ? 'fa fa-eye' : 'fa fa-eye-slash'"
+              ></i>
+            </button>
+          </div>
+        </div>
+
+        <div *ngIf="isSlugExist" class="w-full flex flex-col gap-2 mt-4">
+          <label for="confirm_password" class="font-medium text-sm text-white">
+            {{ "accounts.password_change.password_2" | translate }}
+          </label>
+          <input
+            type="password"
+            id="confirm_password"
+            formControlName="confirm_password"
+            class="border border-gray-600 bg-white/90 rounded-md px-4 py-3 text-base w-full focus:outline-none focus:ring-2 focus:ring-primary placeholder-gray-500"
+            placeholder="Confirmez votre mot de passe"
+          />
+          <div
+            *ngIf="
+              loginForm.get('confirm_password')?.invalid &&
+              loginForm.get('confirm_password')?.touched
+            "
+            class="text-secondary text-sm mt-1"
+          >
+            <span
+              *ngIf="loginForm.get('confirm_password')?.hasError('required')"
+            >
+              {{
+                "accounts.password_change.input.password2.message1" | translate
+              }}
+            </span>
+            <span
+              *ngIf="
+                loginForm.get('confirm_password')?.hasError('passwordMismatch')
+              "
+            >
+              {{
+                "accounts.password_change.input.password2.message2" | translate
+              }}
+            </span>
+          </div>
+        </div>
+
+        <div class="text-end mt-3" *ngIf="!isSlugExist">
+          <a
+            routerLink="/auth/reset-password"
+            class="text-sm font-medium text-redscale hover:underline"
+          >
+             {{ "accounts.password_change.forgot_password" | translate }}
+          </a>
+        </div>
+
+        <div class="mt-8 w-full">
+          <button
+            [disabled]="!loginForm.valid"
+            class="w-full bg-primary hover:bg-blue-400 transition text-white font-semibold py-3 px-6 rounded-lg shadow-md disabled:bg-gray-400 disabled:cursor-not-allowed disabled:opacity-70"
+          >
+            {{ "accounts.login.connection" | translate }}
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

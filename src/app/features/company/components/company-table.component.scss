@@ -1,0 +1,68 @@
+.header-cell {
+    background-color: white !important; // Fond blanc pour le header
+    padding: 4px 4px 0px 4px;
+    text-align: left;
+    font-weight: bold;
+  }
+  
+  .filter-field {
+    width: 100%;
+    background-color: white;
+    border-radius: 6px;
+  }
+  
+  .mat-form-field {
+    width: 100%;
+    background-color: white;
+    border-radius: 6px;
+  }
+  
+  .mat-form-field-appearance-outline .mat-form-field-outline {
+    color: #ddd;
+  }
+  
+
+  .mat-checkbox-label {
+    color: black !important;
+  }
+
+  .mat-checkbox {
+    color: black !important;
+  }
+
+
+  table {
+    table-layout: auto;
+    width: 100%;
+    max-width: 100%;
+    white-space: nowrap;
+  }
+  
+
+  @media screen and (max-width: 768px) {
+    table {
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+  }
+  
+
+  td, th {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+  }
+  
+
+  @media screen and (max-width: 768px) {
+    th, td {
+      white-space: normal;
+      word-break: break-word;
+    }
+  }
+
+  ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    border-color: #4caf50; /* Set the border color to green */
+  }
+  

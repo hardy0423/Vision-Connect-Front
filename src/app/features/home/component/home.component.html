@@ -1,0 +1,202 @@
+<div class="">
+  <div class="flex h-screen">
+    <!-- sidebar -->
+    <div class="flex flex-col md:w-64" [ngClass]="isOpen ? '' : 'hidden'">
+      <div class="flex flex-col items-center justify-center p-2 w-full">
+        <a class="flex items-center w-full" [routerLink]="'/'">
+          <img
+            src="assets/img/lg.png"
+            class="w-full h-20 object-contain"
+            alt="Logo"
+          />
+        </a>
+        <input
+          *ngIf="isAdminOrSuperUser"
+          type="text"
+          [(ngModel)]="searchTerm"
+          (ngModelChange)="filterCompanies()"
+          placeholder="{{ 'company.search_company' | translate }}"
+          class="mx-auto mt-2 mb-3 block w-[90%] rounded-md border border-gray-300 px-1 py-2 text-sm focus:border-primary focus:outline-none"
+        />
+      </div>
+      <div class="flex flex-col flex-1 overflow-y-auto">
+        <nav class="flex-1 px-2 py-3">
+          <ul class="flex flex-col gap-2 max-w-[280px] mx-auto text-gray-500">
+            <div *ngFor="let company of filteredCompanies">
+              <company-sidebar
+                [menuItems]="menu"
+                [company]="company"
+              ></company-sidebar>
+            </div>
+
+            <li class="text-custom-gray" *ngIf="isAdminOrSuperUser">
+              <a
+                routerLink="/admin"
+                routerLinkActive="bg-bluescale text-primary over:text-gray-100"
+                class="flex items-center p-2 py-2 mt-2 hover:text-primary"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-6 h-6 text-redscale"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M10.343 3.94c.09-.542.56-.94 1.11-.94h1.093c.55 0 1.02.398 1.11.94l.149.894c.07.424.384.764.78.93.398.164.855.142 1.205-.108l.737-.527a1.125 1.125 0 011.45.12l.773.774c.39.389.44 1.002.12 1.45l-.527.737c-.25.35-.272.806-.107 1.204.165.397.505.71.93.78l.893.15c.543.09.94.56.94 1.109v1.094c0 .55-.397 1.02-.94 1.11l-.893.149c-.425.07-.765.383-.93.78-.165.398-.143.854.107 1.204l.527.738c.32.447.269 1.06-.12 1.45l-.774.773a1.125 1.125 0 01-1.449.12l-.738-.527c-.35-.25-.806-.272-1.203-.107-.397.165-.71.505-.781.929l-.149.894c-.09.542-.56.94-1.11.94h-1.094c-.55 0-1.019-.398-1.11-.94l-.148-.894c-.071-.424-.384-.764-.781-.93-.398-.164-.854-.142-1.204.108l-.738.527c-.447.32-1.06.269-1.45-.12l-.773-.774a1.125 1.125 0 01-.12-1.45l.527-.737c.25-.35.273-.806.108-1.204-.165-.397-.505-.71-.93-.78l-.894-.15c-.542-.09-.94-.56-.94-1.109v-1.094c0-.55.398-1.02.94-1.11l.894-.149c.424-.07.765-.383.93-.78.165-.398.143-.854-.107-1.204l-.527-.738a1.125 1.125 0 01.12-1.45l.773-.773a1.125 1.125 0 011.45-.12l.737.527c.35.25.807.272 1.204.107.397-.165.71-.505.78-.929l.15-.894z"
+                  ></path>
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                  ></path>
+                </svg>
+                <span class="ml-2">{{ "sidebar.admin" | translate }}</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <!-- Notification Component -->
+        <app-notification *ngIf="!isAdminOrSuperUser"></app-notification>
+      </div>
+    </div>
+
+    <!-- Main content -->
+    <div class="flex flex-col flex-1 overflow-y-auto">
+      <div
+        class="flex items-center justify-between h-16 bg-white border-b border-gray-200"
+      >
+        <div class="flex items-center px-4">
+          <button
+            class="text-gray-500 h-10 mr-4 w-10 focus:outline-none focus:text-gray-700"
+            (click)="openSidebar()"
+          >
+            <img
+              class="h-6 w-6"
+              src="assets/svg/sidebar-panel-collapse-icon.svg"
+              alt=""
+              [ngClass]="isOpen ? '' : 'rotate-180'"
+            />
+          </button>
+        </div>
+        <div class="dropdown relative">
+          <a
+            *ngIf="!inRouter"
+            routerLink="/"
+            class="group flex h-10 mr-4 w-10 cursor-pointer items-center justify-center rounded-3xl bg-white p-2 hover:bg-slate-200"
+          >
+            <div class="relative w-8 h-8">
+              <span
+                class="block h-1 w-8 origin-center rounded-full bg-custom-gray absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rotate-45"
+              ></span>
+              <span
+                class="block h-1 w-8 origin-center rounded-full bg-primary absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 -rotate-45"
+              ></span>
+            </div>
+          </a>
+          <button
+            *ngIf="inRouter"
+            class="dropdown relative flex items-center h-10 mr-4 w-10 text-gray-500 hover:text-gray-700 focus:outline-none focus:text-gray-700 justify-center"
+            (click)="toggleDropdown()"
+            style="box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); border-radius: 50%"
+          >
+            <img
+              class="h-8 w-8 rounded-full"
+              src="assets/img/user.png"
+              alt=""
+            />
+          </button>
+          <div
+            *ngIf="isOpenOption"
+            class="rounded-lg dropdown-content absolute mr-2 right-0 mt-2 menu p-2 shadow-lg rounded-box w-72 bg-white text-gray-700 z-50"
+          >
+            <div
+              class="bg-base-300 p-3 drop-shadow-xl divide-y divide-neutral bg-transparent"
+            >
+              <div class="items-center p-3">
+                <span
+                  class="flex flex-row text-center items-center justify-center"
+                >
+                  <span>{{ mailUser }}</span>
+                </span>
+              </div>
+
+              <div aria-label="navigation" class="py-2">
+                <nav class="grid gap-1">
+                  <button
+                    (click)="openUserProfile()"
+                    type="button"
+                    class="flex items-center leading-6 space-x-3 py-3 px-4 w-full text-lg focus:outline-none hover:bg-primary hover:text-white rounded-md"
+                  >
+                    <svg
+                      class="w-7 h-7"
+                      viewBox="0 0 24 24"
+                      stroke-width="2"
+                      stroke="currentColor"
+                      fill="none"
+                    >
+                      <path
+                        d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z"
+                      ></path>
+                      <path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"></path>
+                    </svg>
+                    <span>{{ "accounts.profile" | translate }}</span>
+                  </button>
+                </nav>
+              </div>
+              <div class="pt-2">
+                <button
+                  type="button"
+                  class="flex items-center space-x-3 py-3 px-4 w-full leading-6 text-lg focus:outline-none hover:bg-redscale hover:text-white rounded-md"
+                  (click)="showConfirmationDialog()"
+                >
+                  <svg
+                    class="w-7 h-7"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                    fill="none"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path
+                      d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2"
+                    ></path>
+                    <path d="M9 12h12l-3 -3"></path>
+                    <path d="M18 15l3 -3"></path>
+                  </svg>
+                  <span>{{ "accounts.deconnection" | translate }}</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="">
+        <router-outlet />
+      </div>
+    </div>
+  </div>
+  <!-- Confirmation Dialog -->
+  <div
+    *ngIf="confirmationDialogVisible"
+    class="fixed inset-0 z-40 min-h-full overflow-y-auto overflow-x-hidden transition flex items-center"
+  >
+    <!-- overlay -->
+    <div
+      aria-hidden="true"
+      class="fixed inset-0 w-full h-full bg-black/50 cursor-pointer"
+      (click)="handleCancel()"
+    ></div>
+
+    <!-- Modal -->
+    <app-confirmation
+      *ngIf="confirmationDialogVisible"
+      (confirm)="handleConfirm()"
+      (cancel)="handleCancel()"
+      buttonColor="bg-red-600"
+    ></app-confirmation>
+  </div>
+</div>

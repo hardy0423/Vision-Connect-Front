@@ -1,0 +1,176 @@
+<div class="dropdown relative">
+  <label tabindex="0" class="">
+    <div
+      class="flex items-center cursor-pointer h-10 w-10 overflow-hidden rounded-full"
+      (click)="toggleDropdown()"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        class="h-10 w-10 p-2 text-white bg-gray-500 stroke-current"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.5"
+          d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+        ></path>
+      </svg>
+    </div>
+  </label>
+  <div
+    *ngIf="isOpen"
+    class="dropdown-content absolute right-0 mt-2 menu p-2 shadow-lg rounded-box w-72 bg-custom-gray text-white"
+  >
+    <div
+      class="rounded-lg bg-base-300 p-3 drop-shadow-xl divide-y divide-neutral bg-transparent"
+    >
+      <div class="flex space-x-4 items-center p-2">
+        <div class="flex mr-auto items-center space-x-4">
+          <img
+            src="assets/img/profile-user.png"
+            alt="Name"
+            class="w-16 h-16 shrink-0 rounded-full"
+          />
+          <div class="space-y-2 flex flex-col flex-1 truncate">
+            <div class="relative leading-tight text-gray-900">
+              <span class="flex flex-col">
+                <span class="block truncate relative text-white font-medium"
+                  >John Doe</span
+                >
+                <span class="block text-sm text-gray-400"
+                  >john.doe.example.com</span
+                >
+              </span>
+            </div>
+            <p class="font-normal text-base leading-tight truncate"></p>
+          </div>
+        </div>
+      </div>
+      <div aria-label="navigation" class="py-2">
+        <nav class="grid gap-1">
+          <a
+            href="/"
+            class="flex items-center leading-6 space-x-3 py-3 px-4 w-full text-lg text-white focus:outline-none hover:bg-custom-gray rounded-md"
+          >
+            <svg
+              class="w-7 h-7"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              fill="none"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+              <path
+                d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z"
+              ></path>
+              <path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"></path>
+            </svg>
+            <span>Profile</span>
+          </a>
+        </nav>
+      </div>
+      <div class="pt-2">
+        <button
+          type="button"
+          class="flex items-center space-x-3 py-3 px-4 w-full leading-6 text-lg text-white focus:outline-none hover:bg-custom-gray rounded-md"
+          (click)="showConfirmationDialog()"
+        >
+          <svg
+            class="w-7 h-7"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+            fill="none"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path
+              d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2"
+            ></path>
+            <path d="M9 12h12l-3 -3"></path>
+            <path d="M18 15l3 -3"></path>
+          </svg>
+          <span>Déconnection</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Confirmation Dialog -->
+<div
+  *ngIf="confirmationDialogVisible"
+  class="fixed inset-0 z-40 min-h-full overflow-y-auto overflow-x-hidden transition flex items-center"
+>
+  <!-- overlay -->
+  <div
+    aria-hidden="true"
+    class="fixed inset-0 w-full h-full bg-black/50 cursor-pointer"
+    (click)="handleCancel()"
+  ></div>
+
+  <!-- Modal -->
+  <div
+    class="relative w-full cursor-pointer pointer-events-none transition my-auto p-4"
+  >
+    <div
+      class="w-full py-2 bg-white cursor-default pointer-events-auto dark:bg-gray-800 relative rounded-xl mx-auto max-w-sm"
+    >
+      <button
+        tabindex="-1"
+        type="button"
+        (click)="handleCancel()"
+        class="absolute top-2 right-2 rtl:right-auto rtl:left-2"
+      >
+        <svg
+          title="Close"
+          tabindex="-1"
+          class="h-4 w-4 cursor-pointer text-gray-400"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          aria-hidden="true"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+            clip-rule="evenodd"
+          ></path>
+        </svg>
+        <span class="sr-only">Close</span>
+      </button>
+
+      <div class="space-y-2 p-2">
+        <div class="p-4 space-y-2 text-center dark:text-white">
+          <h2 class="text-xl font-bold tracking-tight">Déconnect John Doe</h2>
+          <p class="text-gray-500">Est-vous sûr de vouloir se déconnecter ?</p>
+        </div>
+      </div>
+
+      <div class="space-y-2">
+        <div
+          aria-hidden="true"
+          class="border-t dark:border-gray-700 px-2"
+        ></div>
+        <div class="px-6 py-2">
+          <div class="grid gap-2 grid-cols-[repeat(auto-fit,minmax(0,1fr))]">
+            <button
+              type="button"
+              (click)="handleCancel()"
+              class="inline-flex items-center justify-center py-1 gap-1 font-medium rounded-lg border transition-colors outline-none focus:ring-offset-2 focus:ring-2 focus:ring-inset dark:focus:ring-offset-0 min-h-[2.25rem] px-4 text-sm text-gray-800 bg-white border-gray-300 hover:bg-gray-50 focus:ring-primary-600 focus:text-primary-600 focus:bg-primary-50 focus:border-primary-600 dark:bg-gray-800 dark:hover:bg-gray-700 dark:border-gray-600 dark:hover:border-gray-500 dark:text-gray-200 dark:focus:text-primary-400 dark:focus:border-primary-400 dark:focus:bg-gray-800"
+            >
+              Annulé
+            </button>
+            <button
+              type="button"
+              (click)="handleConfirm()"
+              class="inline-flex items-center justify-center py-1 gap-1 font-medium rounded-lg border transition-colors outline-none focus:ring-offset-2 focus:ring-2 focus:ring-inset dark:focus:ring-offset-0 min-h-[2.25rem] px-4 text-sm text-white shadow focus:ring-white border-transparent bg-red-600 hover:bg-red-500 focus:bg-red-700 focus:ring-offset-red-700"
+            >
+              Confirmer
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

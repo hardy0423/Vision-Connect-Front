@@ -1,0 +1,65 @@
+<h1 mat-dialog-title class="mat-dialog-title">
+  <div class="absolute top-1 right-1">
+    <div class="relative">
+      <button
+        mat-icon-button
+        (click)="onCancel()"
+        class="group flex h-10 w-10 cursor-pointer items-center justify-center rounded-3xl bg-white hover:bg-slate-200"
+      >
+        <div class="relative w-6 h-6">
+          <span
+            class="block h-1 w-8 origin-center rounded-full bg-custom-gray absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rotate-45"
+          ></span>
+          <span
+            class="block h-1 w-8 origin-center rounded-full bg-primary absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 -rotate-45"
+          ></span>
+        </div>
+      </button>
+    </div>
+  </div>
+  {{ "user.title_admin" | translate }}
+</h1>
+<div mat-dialog-content>
+  <div class="mt-7" style="margin-top: 5px">
+    <form [formGroup]="adminFormGroup">
+      <div class="form">
+        <mat-form-field appearance="fill">
+          <mat-label>{{ "user.nom" | translate }}</mat-label>
+          <input matInput placeholder="Le Nom" formControlName="first_name" />
+          <mat-error
+            *ngIf="adminFormGroup.get('first_name')?.hasError('required')"
+          >
+            {{ "user.error.error_name" | translate }}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>{{ "user.prenom" | translate }}</mat-label>
+          <input matInput placeholder="" formControlName="last_name" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>{{ "user.email" | translate }} </mat-label>
+          <input matInput formControlName="email" type="email" name="email" />
+          <mat-error *ngIf="adminFormGroup.get('email')!.errors?.['required']">
+            {{ "user.error.error_email" | translate }}
+          </mat-error>
+
+          <mat-error
+            *ngIf="adminFormGroup.get('email')?.hasError('emailExists')"
+          >
+            {{ "user.error.email_already_exists" | translate }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="flex justify-end">
+        <button mat-stroked-button color="warn" (click)="onCancel()" class="mr-2">
+          {{ "user.annuler" | translate }}
+        </button>
+        <button [disabled]="!adminFormGroup.valid" mat-stroked-button color="primary" (click)="onSave()">
+          {{ "user.save" | translate }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

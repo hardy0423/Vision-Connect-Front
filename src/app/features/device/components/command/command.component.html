@@ -1,0 +1,226 @@
+<div>
+  <div class="modal-header mb-6 text-center">
+    <h1 mat-dialog-title class="mat-dialog-title">
+      <div class="absolute top-1 right-1">
+        <div class="relative">
+          <button
+            mat-icon-button
+            (click)="closeDialog()"
+            class="group flex h-10 w-10 cursor-pointer items-center justify-center rounded-3xl bg-white hover:bg-slate-200"
+          >
+            <div class="relative w-6 h-6">
+              <span
+                class="block h-1 w-8 origin-center rounded-full bg-custom-gray absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rotate-45"
+              ></span>
+              <span
+                class="block h-1 w-8 origin-center rounded-full bg-primary absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 -rotate-45"
+              ></span>
+            </div>
+          </button>
+        </div>
+      </div>
+      {{ "device.command.title" | translate }}
+    </h1>
+  </div>
+
+  <div class="flex">
+    <div class="command-list w-1/3 p-4 border-r border-gray-300">
+      <h3 class="text-xl font-semibold text-primary mb-4">
+        {{ "device.command.list_title" | translate }}
+      </h3>
+      <ul>
+        <li
+          *ngFor="let command of getCommandList()"
+          (click)="selectCommand(command)"
+          class="p-2 rounded cursor-pointer hover:bg-blue-100 transition flex items-center"
+        >
+          {{ command.name }}
+        </li>
+      </ul>
+    </div>
+
+    <div class="command-actions w-2/3 p-4">
+      <h3 class="text-xl font-semibold text-primary mb-4">
+        {{ "device.command.actions_title" | translate }}
+      </h3>
+      <div *ngIf="selectedCommand">
+        <p class="text-gray-600 mb-4">{{ selectedCommand.description }}</p>
+
+        <div *ngIf="selectedCommand && selectedCommand.id === 121">
+          <div
+            *ngIf="isGetInfoLoading"
+            class="flex justify-center items-center h-64"
+          >
+            <i class="fa fa-refresh fa-spin text-5xl text-blue-400"></i>
+          </div>
+
+          <div *ngIf="!isGetInfoLoading" class="max-h-64 overflow-y-auto pr-4">
+            <div *ngFor="let info of getDeviceInfoDescriptions()">
+              <div class="my-1">
+                <strong class="text-blue-500">{{ info.key }}:</strong>
+                {{ info.value }} <span class="font-bold">[</span>
+                {{ info.description }}
+                <span class="font-bold">]</span>
+              </div>
+            </div>
+
+            <div
+              *ngIf="!getDeviceInfoDescriptions()?.length"
+              class="text-center text-red-500"
+            >
+              <i class="fa fa-exclamation-circle text-3xl"></i>
+              <ng-container *ngIf="errorDeviceInfo; else notConnected">
+                <p>{{ errorDeviceInfo }}</p>
+              </ng-container>
+
+              <ng-template #notConnected>
+                <p>{{ "device.command.not_connected" | translate }}</p>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="selectedCommand && selectedCommand.id === 212">
+          <div
+            *ngIf="isGetStatusLoading"
+            class="flex justify-center items-center h-64"
+          >
+            <i class="fa fa-refresh fa-spin text-5xl text-blue-400"></i>
+          </div>
+
+          <div
+            *ngIf="!isGetStatusLoading"
+            class="max-h-64 overflow-y-auto pr-4"
+          >
+            <div *ngFor="let info of getDeviceStatusDescriptions()">
+              <div class="my-1">
+                <strong class="text-blue-500">{{ info.key }}:</strong>
+                {{ info.value }} <span class="font-bold">[</span>
+                {{ info.description }}
+                <span class="font-bold">]</span>
+              </div>
+            </div>
+
+            <div
+              *ngIf="!getDeviceStatusDescriptions()?.length"
+              class="text-center text-red-500"
+            >
+              <i class="fa fa-exclamation-circle text-3xl"></i>
+              <ng-container *ngIf="errorDeviceStatus; else notConnected">
+                <p>{{ errorDeviceStatus }}</p>
+              </ng-container>
+
+              <ng-template #notConnected>
+                <p>{{ "device.command.not_connected" | translate }}</p>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="selectedCommand && selectedCommand.id === 323">
+          <div class="flex items-center justify-center h-64" *ngIf="isLoading">
+            <i class="fa fa-refresh fa-spin text-5xl text-blue-400"></i>
+          </div>
+          <div *ngIf="!isLoading">
+            <mat-slide-toggle
+              [checked]="isEngineStopped"
+              (change)="toggleEngine($event)"
+              class="mat-slide-toggle"
+            >
+              <span class="text-black">
+                {{
+                  isEngineStopped
+                    ? ("device.command.engine.start" | translate)
+                    : ("device.command.engine.stop" | translate)
+                }}
+              </span>
+            </mat-slide-toggle>
+
+            <div *ngIf="!isLoading" class="max-h-64 overflow-y-auto pr-4 mt-2">
+              <div *ngFor="let info of getDeviceEngineImmobilizeDescriptions()">
+                <div class="my-1">
+                  <strong class="text-blue-500">{{ info.key }}:</strong>
+                  {{ info.value }} <span class="font-bold">[</span>
+                  {{ info.description }}
+                  <span class="font-bold">]</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          *ngIf="selectedCommand && selectedCommand.id === 434"
+          class="flex flex-col space-y-4"
+        >
+          <div class="flex items-center">
+            <input
+              min="0"
+              type="number"
+              [(ngModel)]="speedLimit"
+              [placeholder]="
+                'device.command.speed_limit.placeholder' | translate
+              "
+              class="w-[30%] p-2 border border-gray-300 rounded-md text-sm"
+            />
+            <span class="ml-2 text-gray-600">{{
+              "device.command.speed_limit.unit" | translate
+            }}</span>
+          </div>
+
+          <button
+            [disabled]="speedLimit === 0 || !speedLimit"
+            (click)="applySpeedLimit()"
+            mat-stroked-button
+            color="primary"
+            class="w-[20%] disabled:bg-gray-400 disabled:cursor-not-allowed"
+          >
+            {{ "device.command.speed_limit.set" | translate }}
+          </button>
+        </div>
+
+        <div *ngIf="selectedCommand && selectedCommand.id === 545">
+          <div
+            *ngIf="isGetGpsLoading"
+            class="flex justify-center items-center h-64"
+          >
+            <i class="fa fa-refresh fa-spin text-5xl text-blue-400"></i>
+          </div>
+
+          <div *ngIf="!isGetGpsLoading" class="max-h-64 overflow-y-auto pr-4">
+            <div *ngFor="let info of getDeviceGpsDescriptions()">
+              <div class="my-1">
+                <strong class="text-blue-500">{{ info.key }}:</strong>
+                <ng-container *ngIf="info.key === 'Url'; else normalText">
+                  <a [href]="info.value.trim()" target="_blank">{{
+                    info.value.trim()
+                  }}</a>
+                </ng-container>
+                <ng-template #normalText>{{ info.value }}</ng-template>
+                <span class="font-bold"> [</span> {{ info.description }}
+                <span class="font-bold">]</span>
+              </div>
+            </div>
+
+            <div
+              *ngIf="!getDeviceGpsDescriptions()?.length"
+              class="text-center text-red-500"
+            >
+              <i class="fa fa-exclamation-circle text-3xl"></i>
+              <ng-container *ngIf="errorDevicePosition; else notConnected">
+                <p>{{ errorDevicePosition }}</p>
+              </ng-container>
+
+              <ng-template #notConnected>
+                <p>{{ "device.command.not_connected" | translate }}</p>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="!selectedCommand" class="flex justify-center items-center">
+        <img src="assets/img/car.jpg" height="50px" />
+      </div>
+    </div>
+  </div>
+</div>

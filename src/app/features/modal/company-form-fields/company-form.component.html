@@ -1,0 +1,159 @@
+<h1 mat-dialog-title class="mat-dialog-title">
+  <div class="absolute top-1 right-1">
+    <div class="relative">
+      <button
+        mat-icon-button
+        (click)="onCancel()"
+        class="group flex h-10 w-10 cursor-pointer items-center justify-center rounded-3xl bg-white hover:bg-slate-200"
+      >
+        <div class="relative w-6 h-6">
+          <span
+            class="block h-1 w-8 origin-center rounded-full bg-custom-gray absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rotate-45"
+          ></span>
+          <span
+            class="block h-1 w-8 origin-center rounded-full bg-primary absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 -rotate-45"
+          ></span>
+        </div>
+      </button>
+    </div>
+  </div>
+
+  {{ data.isAdd ? "Ajouter une Entreprise" : "Modifier une Entreprise" }}
+</h1>
+
+<div mat-dialog-content>
+  <div class="m-10">
+    <form [formGroup]="companyFormGroup">
+      <div class="form">
+        <!-- Afficher un message d'erreur général (si nécessaire) -->
+        <div *ngIf="errorMessage" class="text-red-500 text-sm mt-1">
+          {{ errorMessage }}
+        </div>
+
+        <!-- Nom de l'entreprise -->
+        <mat-form-field appearance="fill" class="mt-3">
+          <mat-label>{{ "company.name" | translate }}</mat-label>
+          <input
+            matInput
+            placeholder="Nom de l'entreprise"
+            formControlName="name"
+          />
+          <mat-error *ngIf="companyFormGroup.get('name')?.hasError('required')">
+            {{ "company.error.required_name" | translate }}
+          </mat-error>
+          <mat-error
+            *ngIf="companyFormGroup.get('name')?.hasError('maxlength')"
+          >
+            {{ "company.error.maxlength_name" | translate }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Email de l'entreprise -->
+        <mat-form-field appearance="fill">
+          <mat-label>{{ "company.email" | translate }}</mat-label>
+          <input
+            matInput
+            placeholder="Email"
+            formControlName="email"
+            type="email"
+          />
+          <mat-error *ngIf="companyFormGroup.get('email')?.hasError('email')">
+            {{ "company.error.invalid_email" | translate }}
+          </mat-error>
+          <mat-error
+            *ngIf="companyFormGroup.get('email')?.hasError('emailExists')"
+          >
+            {{ "company.error.email_already_exists" | translate }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Région -->
+        <mat-form-field appearance="fill">
+          <mat-label>{{ "company.region" | translate }}</mat-label>
+          <input matInput placeholder="Région" formControlName="region" />
+          <mat-error
+            *ngIf="companyFormGroup.get('region')?.hasError('maxlength')"
+          >
+            {{ "company.error.maxlength_region" | translate }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Adresse -->
+        <mat-form-field appearance="fill">
+          <mat-label>{{ "company.adress" | translate }}</mat-label>
+          <input matInput placeholder="Adresse" formControlName="adress" />
+          <mat-error
+            *ngIf="companyFormGroup.get('adress')?.hasError('maxlength')"
+          >
+            {{ "company.error.maxlength_adress" | translate }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Pays -->
+        <mat-form-field appearance="fill">
+          <mat-label>{{ "company.country" | translate }}</mat-label>
+          <mat-select formControlName="country">
+            <mat-option value="">{{
+              "company.select_country" | translate
+            }}</mat-option>
+            <mat-option *ngFor="let country of countries" [value]="country.id">
+              {{ country.name }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+            *ngIf="companyFormGroup.get('country')?.hasError('required')"
+          >
+            {{ "company.error.required_country" | translate }}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" *ngIf="isVisionConnect">
+          <mat-label>{{ "company.device_count" | translate }}</mat-label>
+          <input
+            matInput
+            placeholder="Nombre de dispositifs"
+            type="number"
+            formControlName="nbr_device"
+            [min]="0"
+            [step]="1"
+          />
+          <mat-error
+            *ngIf="companyFormGroup.get('nbr_device')?.hasError('required')"
+          >
+            {{ "company.error.required_device_count" | translate }}
+          </mat-error>
+          <mat-error
+            *ngIf="companyFormGroup.get('nbr_device')?.hasError('min')"
+          >
+            {{ "company.error.min_device_count" | translate }}
+          </mat-error>
+
+          <mat-error
+            *ngIf="
+              companyFormGroup
+                .get('nbr_device')
+                ?.hasError('invalidDeviceNumber')
+            "
+          >
+            {{ "company.error.device_limit" | translate }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- Boutons -->
+      <div class="actions flex justify-end space-x-4">
+        <button mat-stroked-button color="warn" (click)="onCancel()">
+          {{ "company.cancel" | translate }}
+        </button>
+        <button
+          [disabled]="!companyFormGroup.valid"
+          mat-stroked-button
+          (click)="onSave()"
+          color="primary"
+        >
+          {{ "company.save" | translate }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,145 @@
+<h1 mat-dialog-title class="mat-dialog-title">
+  <div class="absolute top-1 right-1">
+    <div class="relative">
+      <button
+        mat-icon-button
+        (click)="onNoClick()"
+        class="group flex h-10 w-10 cursor-pointer items-center justify-center rounded-3xl bg-white hover:bg-slate-200"
+      >
+        <div class="relative w-6 h-6">
+          <span
+            class="block h-1 w-8 origin-center rounded-full bg-custom-gray absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rotate-45"
+          ></span>
+          <span
+            class="block h-1 w-8 origin-center rounded-full bg-primary absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 -rotate-45"
+          ></span>
+        </div>
+      </button>
+    </div>
+  </div>
+  {{ (data.isAdd ? "device.add_device" : "device.update_device") | translate }}
+</h1>
+<mat-dialog-content style="overflow-y: scroll">
+  <mat-stepper linear="true" #stepper>
+    <!-- Étape 1: Formulaire -->
+    <mat-step [stepControl]="deviceFormGroup">
+      <ng-template matStepLabel>
+        {{ "device.device_info" | translate }}</ng-template
+      >
+      <div class="form-container">
+        <!-- Conteneur du formulaire -->
+        <app-add-device
+          (deviceFormGroupChange)="setDeviceFormGroup($event)"
+          (markerCoordsChange)="setMarkerCoordsChange($event)"
+        ></app-add-device>
+        <!-- Conteneur pour l'image -->
+        <div class="maps-container">
+          <app-position-map [markerCoords]="markerCoords" />
+        </div>
+      </div>
+    </mat-step>
+
+    <!-- Étape 2: Carte Geographique -->
+    <mat-step #step2>
+      <ng-template matStepLabel>
+        {{ "map.intervention_zone" | translate }}
+      </ng-template>
+
+      <div class="form-draw-container">
+        <!-- Partie Gauche -->
+        <div class="left-section">
+          <ng-container
+            *ngIf="
+              (listInterventionZone$ | async) &&
+              (listInterventionZone$ | async)?.length! > 0
+            "
+          >
+            <mat-form-field class="zone-select">
+              <mat-label>{{ "map.choose_zone" | translate }}</mat-label>
+              <mat-select [formControl]="selectedInterventionZone">
+                <ng-container
+                  *ngIf="listInterventionZone$ | async as listInterventionZone"
+                >
+                  <mat-option
+                    value="0"
+                    *ngIf="
+                      (listInterventionZone$ | async) &&
+                      (listInterventionZone$ | async)?.length! < 0
+                    "
+                    >{{ "map.all_zone" | translate }}</mat-option
+                  >
+                  <mat-option
+                    *ngFor="let interventionZone of listInterventionZone"
+                    [value]="interventionZone.uid"
+                  >
+                    {{ interventionZone.nameZone }}
+                  </mat-option>
+                </ng-container>
+              </mat-select>
+            </mat-form-field>
+          </ng-container>
+        </div>
+
+        <!-- Partie Centre -->
+        <div class="center-section" *ngIf="showInfoNameZone">
+          <mat-icon class="info-icon" color="primary">info</mat-icon>
+          <p class="info-text">{{ "map.info_name_zone" | translate }}</p>
+        </div>
+
+        <!-- Partie Droite -->
+        <div class="right-section" *ngIf="drawInterventionZone">
+          <form class="name-form">
+            <mat-form-field class="full-width">
+              <mat-label>Nom</mat-label>
+              <input
+                type="text"
+                matInput
+                [formControl]="namezoneFormControl"
+                [errorStateMatcher]="matcher"
+                placeholder="Zone Nord-Est"
+              />
+              <mat-error *ngIf="namezoneFormControl.hasError('required')">
+                {{ "map.error.error_name_zone" | translate }}
+              </mat-error>
+            </mat-form-field>
+          </form>
+        </div>
+      </div>
+
+      <div class="map-container">
+        <draw-zone-map
+          [markerCoords]="markerCoords"
+          (drawZoneEvent)="onDrawZone($event)"
+          [namezone]="namezoneFormControl.value!"
+          (errorNameZone)="emptyNameInterventionZone($event)"
+          [selectedInterventionZoneId]="intervetionZoneId"
+          (deleteZoneEvent)="deleteZoneEvent($event)"
+          (saveZoneEvent)="saveZoneEvent($event)"
+          (mapEmitted)="onMapReceived($event)"
+          (featureChanged)="handleFeatureChange($event)"
+          (deselectZone)="onDeselectZone($event)"
+        />
+      </div>
+      <div class="step-navigation">
+        <button
+          color="primary"
+          [disabled]="!deviceFormGroup.valid"
+          mat-stroked-button
+          matStepperPrevious
+          class="mat-stepper-previous"
+        >
+          {{ "map.precedent" | translate }}
+        </button>
+        <button
+          [disabled]="isButtonDisabled"
+          mat-stroked-button
+          matStepperNext
+          color="primary"
+          (click)="saveDeviceAndZoneData()"
+        >
+          {{ "map.valider" | translate }}
+        </button>
+      </div>
+    </mat-step>
+  </mat-stepper>
+</mat-dialog-content>

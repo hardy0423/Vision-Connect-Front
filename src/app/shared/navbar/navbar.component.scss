@@ -1,0 +1,10 @@
+ul.breadcrumb li+li::before {
+  content: "\276F";
+  padding-left: 8px;
+  padding-right: 4px;
+  color: inherit;
+}
+
+ul.breadcrumb li span {
+  opacity: 60%;
+}

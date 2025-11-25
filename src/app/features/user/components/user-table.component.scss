@@ -1,0 +1,22 @@
+.header-cell {
+  background-color: white !important; // Fond blanc pour le header
+  padding: 4px 4px 0px 4px;
+  text-align: left;
+  font-weight: bold;
+}
+
+.filter-field {
+  width: 100%;
+  background-color: white;
+  border-radius: 6px;
+}
+
+.mat-form-field {
+  width: 100%;
+  background-color: white;
+  border-radius: 6px;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  color: #ddd;
+}

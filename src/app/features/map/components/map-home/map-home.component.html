@@ -1,0 +1,41 @@
+<div class="relative w-full h-full">
+  <div
+    id="map"
+    #mapContainer
+    class="absolute top-0 left-0 right-0 bottom-0"
+  ></div>
+</div>
+<div id="popup" class="ol-popup flex flex-col justify-center items-center">
+  <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+  <div id="popup-content"></div>
+</div>
+<div class="absolute bottom-2">
+  <div class="flex justify-center items-center" style="margin-left: 20px">
+    <div
+      *ngFor="let baseMap of imageBaseMap"
+      (click)="switchBaseMap(baseMap)"
+      style="margin-left: 7px"
+      class="cursor-pointer hover:opacity-75 transition-opacity"
+    >
+      <div class="">
+        <img
+          [src]="baseMap.urlImage"
+          [alt]="baseMap.nom"
+          class="w-16 h-16 object-cover rounded"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  *ngIf="coordinates"
+  class="absolute bottom-2 right-3 p-3 bg-black bg-opacity-60 text-white rounded-lg shadow-lg flex items-center space-x-2"
+>
+  <p class="text-sm">
+    <strong>{{ "report.latitude" | translate }}:</strong>
+    {{ coordinates.lat }} |
+    <strong>{{ "report.longitude" | translate }}:</strong>
+    {{ coordinates.lng }}
+  </p>
+</div>

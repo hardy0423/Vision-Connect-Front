@@ -1,0 +1,554 @@
+{
+  "modal": {
+    "confirmation": "Confirmer"
+  },
+  "sidebar": {
+    "brand": {
+      "logo": "",
+      "name": "GeoTrack"
+    },
+    "search": "Rechercher ici ...",
+    "navs": {
+      "dashboard": "Dashboard",
+      "device": "Appareils",
+      "perimetre": "Périmètres Virtuels",
+      "reports": "Rapports",
+      "pilote": "Pilotes",
+      "calendar": "Calendrier"
+    },
+    "logout": {
+      "message": "Êtes-vous sûr de vouloir vous déconnecter ?",
+      "header": "Déconnection",
+      "accept": "Oui",
+      "reject": "Non"
+    },
+    "admin": "Administration"
+  },
+  "accounts": {
+    "login": {
+      "titre_connection": "Connexion",
+      "connection_success": "Connexion réussie",
+      "header": "Connection",
+      "title": "Identifiez-vous",
+      "connection": "Se Connecter",
+      "description": "L'innovation en mouvement, connectez-vous pour une géolocalisation précise et performante",
+      "input": {
+        "identifiant": "Nom ou adresse e-mail",
+        "placeholder": "Votre Identifiant",
+        "username": {
+          "placeholder": "Votre Identifiant",
+          "message": "Identifiant doit contenir au moins 4 caractères"
+        },
+        "password": {
+          "placeholder": "Votre mot de passe",
+          "message1": "Mot de passe requis",
+          "message2": "Le mot de passe doit contenir au moins 6 caractères"
+        },
+        "confirm_password": {
+          "title": "Confirmation mot de passe",
+          "placeholder": "Confirmez votre mot de passe",
+          "message1": "Confirmation du mot de passe requise",
+          "message2": "Le mot de passe de confirmation doit être identique"
+        }
+      },
+      "alert": {
+        "error_401": "Formulaire invalide. Reesssayer",
+        "error_200": "Connection reussit !",
+        "error_500": "Une erreur c'est produit !",
+        "error_400": "Email ou mot de passe invalide",
+        "user_not_found": "Impossible de trouver cet utilisateur",
+        "error_identifiant": "Identifiant requis."
+      },
+      "success": {
+        "success_login": "Connexion réussie"
+      },
+      "send_mail_error": "Échec de l'envoi de l'email. Vérifiez votre adresse.",
+      "mail_sent": "Un email a été envoyé à l'adresse indiquée",
+      "mail_required_error": "L'email est requis"
+    },
+    "password_change": {
+      "forgot_password": "Mot de passe oublié ?",
+      "title_password_changed": "Enregistrement du mot de passe",
+      "password_1": "Mot de passe",
+      "placeholder_ps1": "Votre mot de passe",
+      "password_2": "Confirmation du Mot de Passe",
+      "success_changed": "Mot de passe mis à jour avec succès",
+      "error_changed": "Une erreur est survenue lors de la mise à jour du mot de passe",
+      "password_changed": "Mot de passe enregistré avec succès",
+      "input": {
+        "password1": {
+          "placeholder": "Nouveau Mot de Passe",
+          "message1": "Mot de passe requis",
+          "message2": "Mot de passe doit contenir au moins 6 caractères"
+        },
+        "password2": {
+          "placeholder": "Confirmez le Mot de Passe",
+          "message1": "Confirmation du mot de passe requise",
+          "message2": "Les mots de passe ne correspondent pas"
+        }
+      },
+      "alert": {
+        "error_401": "Formulaire invalide. Reesssayer",
+        "error_200": "Mot de passe changé avec succès !",
+        "error_500": "Une erreur c'est produit !",
+        "error_400": "Erreur lors du changement du mot de passe !"
+      }
+    },
+    "reset_password": {
+      "title": "Réinitialiser le mot de passe",
+      "description": "Veuillez entrer votre adresse e-mail pour recevoir un lien de réinitialisation du mot de passe.",
+      "input":"Adresse e-mail",
+      "email_placeholder": "Entrez votre adresse e-mail",
+      "email_required": "L'adresse e-mail est requise",
+      "send_link": "Envoyer le lien de réinitialisation",
+      "success_message": "Un lien de réinitialisation a été envoyé à votre adresse e-mail.",
+      "error_message": "Une erreur s'est produite lors de l'envoi du lien de réinitialisation. Veuillez réessayer.",
+      "button": "Reinitialiser le mot de passe",
+      "back_login":"Retourner à la page de connexion"
+    },
+    "profile": "Profil",
+    "deconnection": "Déconnexion",
+    "modal": {
+      "title": "Modifier mon profil",
+      "title_admin": "Modifier le profil de l'administrateur",
+      "fields": {
+        "first_name": "Nom",
+        "last_name": "Prenom",
+        "firstName_placeholder": "Entrez votre nom",
+        "lastName_placeholder": "Entrez votre prenom",
+        "email": "Email",
+        "email_placeholder": "Entrez votre email"
+      },
+      "password": {
+        "link": "Modifier également le mot de passe",
+        "link_reset": "Annuler la modification du mot de passe",
+        "current_password": "Votre mot de passe actuel",
+        "current_password_placeholder": "Entrez votre mot de passe actuel",
+        "new_password": "Nouveau mot de passe",
+        "new_password_placeholder": "Entrez un nouveau mot de passe",
+        "confirm_password": "Confirmation mot de passe",
+        "confirm_password_placeholder": "Confirmez le nouveau mot de passe",
+        "error_mismatch": "Le nouveau mot de passe et la confirmation ne correspondent pas",
+        "error_minlength": "Le mot de passe doit contenir au moins 5 caractères"
+      },
+      "buttons": {
+        "cancel": "Annuler",
+        "save": "Enregistrer"
+      },
+      "success": {
+        "profile_updated": "Profil mis à jour avec succès."
+      },
+      "error": {
+        "profile_update_failed": "Échec de la mise à jour du profil. Veuillez réessayer."
+      }
+    }
+  },
+  "map": {
+    "precedent": "Précédent",
+    "suivant": "Suivant",
+    "valider": "Valider",
+    "soumetre": "Soumettre",
+    "save_polygon": "Sauvegarder la zone",
+    "draw_polygon": "Dessiner une zone",
+    "draw_line_from_two_points": "Dessiner une ligne à partir de 2 points",
+    "add_file": "Ajouter un fichier",
+    "update_polygon": "Supprimer la zone",
+    "edit_polygon": "Mettre à jour la zone",
+    "prepare_lidar_data": "Préparer les données LIDAR",
+    "error_creating_map": "Erreur lors de la création d'une barrière géographique",
+    "success_creating_map": "La barrière géographique a été créée avec succès",
+    "error_name": "Le  nom de la barrière géographique est vide",
+    "delete_zone": "Êtes-vous sûr de vouloir supprimer la zone sélectionnée ?",
+    "confirmation": "Confirmer",
+    "refus": "Annuler",
+    "title_suppression": "Suppression de la zone",
+    "info_name_zone": "Veuillez indiquer le nom de la zone.",
+    "zone_name": "Nom",
+    "intervention_zone": "Zone d'intervention",
+    "revision": "Révision",
+    "errors": {
+      "too_long_boundary": "La trace dépasse la limite de 50 km."
+    },
+    "choose": "Choisir",
+    "choose_zone": "Sélectionnez une zone",
+    "all_zone": "Toutes les zones",
+    "generate_file_title": "Générer une ligne à partir de deux points",
+    "existing_boundary": {
+      "title": "Géométrie existante",
+      "content": "Voulez-vous <b>Continuer</b> la génération des données lidars ou <b>Afficher</b> la liaison existante ?",
+      "show": "Afficher",
+      "continue": "Continuer"
+    },
+    "error": {
+      "error_get_zone_liste": "Erreur lors de la récupération de la liste des zones d'intervention",
+      "error_name_zone": "Le nom de la zone est requis"
+    }
+  },
+  "device": {
+    "add": "Ajouter",
+    "add_device": "Ajouter un appareil",
+    "update_device": "Modifier un appareil",
+    "delete": "Supprimer",
+    "device_info": "Informations sur l'appareil",
+    "device_config": "Configuration de l'appareil",
+    "device_name_hote": "Domaine",
+    "adress_ip": "Adresse IP",
+    "port": "Port",
+    "car_name": "Immatriculation",
+    "device_name": "Nom de l'appareil",
+    "device_type": "Type d'Appareil",
+    "IMEI": "IMEI",
+    "sim_numero": "Numero de SIM",
+    "user_apn": "APN Utilisateur",
+    "password_apn": "APN Mot de passe",
+    "status": "Status",
+    "actif": "Actif",
+    "inactif": "Inactif",
+    "device_list": "Liste des appareils",
+    "all_device": "Afficher tous",
+    "device_name_revision": "Nom de l'appareil",
+    "device_company_name": "Nom de l’entreprise",
+    "device_phone": "Numéro de téléphone",
+    "success_restore_device": "Appareil restauré avec succès",
+    "success_delete_device": "Appareil désactivé avec succès",
+    "success_creating_device": "L'appareil a été créé avec succès",
+    "success_updating_device": "L'appareil a été mis à jour avec succès",
+    "title_inactif": "Inactivation de l'appareil",
+    "inactif_content": "Êtes-vous sûr de vouloir inactiver cet appareil ?",
+    "confirmation": "Oui",
+    "refus": "Non",
+    "max_device_info": "Vous avez atteint le nombre maximum de matériel autorisé.",
+    "company": "Entreprise",
+    "device_actif": "Appareil actif",
+    "device_inactif": "Appareil inactif",
+    "title_activation": "Activation de l'appareil",
+    "activate_device": "Êtes-vous sûr de vouloir activer cet appareil ?",
+    "header_table": {
+      "type": "Type",
+      "name": "Nom de l'appareil",
+      "car_name": "Immatriculation",
+      "imei": "IMEI",
+      "sim_number": "N° Carte SIM",
+      "status": "Statut",
+      "intervention_zone": "Zone d'intervention",
+      "company_manager": "Entreprise",
+      "actions": "Actions",
+      "action_restore": "Restaurer l’appareil",
+      "action_update": "Mettre à jour l’appareil",
+      "action_disable": "Désactiver l'appareil",
+      "action_command": "Envoyer une commande à l’appareil"
+    },
+    "error": {
+      "error_get_device_list": "Erreur lors de la récupération de la liste des appareils",
+      "error_name_device": "Le nom est requis",
+      "error_name_car": "L'immatriculation du véhicule est requise",
+      "error_type_device": "Le type est requis",
+      "error_imei_requis": "L'IMEI est requis.",
+      "error_imei_length": "L'IMEI doit être un nombre de 15 ou 16 chiffres.",
+      "error_imei_exist": "L'IMEI est déjà utilisé.",
+      "error_sim_numero": "Le numéro de téléphone peut contenir des chiffres, des espaces,des tirets, des parenthèses et des signes plus.",
+      "error_user_apn": "Le nom d'utilisateur est requis.",
+      "error_password_apn": "Le mot de passe est requis.",
+      "error_status": "Le status est requis",
+      "error_creating_device": "Erreur lors de la création d'un nouvel appareil",
+      "error_updating_device": "Erreur lors de la mise à jour de l'appareil",
+      "restore_device": "Erreur lors de la restauration de l'appareil",
+      "delete_device": "Erreur lors de la suppression de l'appareil"
+    },
+    "command": {
+      "not_connected": "L'appareil n'est pas connecté, Veuillez vérifier la connexion",
+      "title": "Commande sur l'appareil",
+      "list_title": "Liste des Commandes",
+      "actions_title": "Actions pour la commande",
+      "loading": "Commande en cours d’exécution...",
+      "get_info": "Obtenir les informations",
+      "get_info_loading": "Récupération des informations...",
+      "get_status": "Obtenir le statut",
+      "engine": {
+        "start": "Démarrer Moteur",
+        "stop": "Arrêter Moteur"
+      },
+      "speed_limit": {
+        "placeholder": "Entrer la vitesse limite",
+        "unit": "km/h",
+        "set": "Définir"
+      },
+      "close": "Fermer",
+      "success": {
+        "engineEnabled": "Le moteur a été démarré avec succès.",
+        "engineDisabled": "Le moteur a été arrêté avec succès.",
+        "speedLimit": "La limite de vitesse a été définie avec succès.",
+        "get_info": "Les informations ont été récupérées avec succès.",
+        "get_status": "Le statut a été récupéré avec succès.",
+        "get_position": "La position a été récupérée avec succès."
+      },
+      "error": {
+        "engine": "Échec de l'exécution de la commande d'anti-démarrage.",
+        "speedLimit": "Impossible de définir la limite de vitesse.",
+        "get_info": "Une erreur est survenue lors de la récupération des informations.",
+        "get_status": "Une erreur est survenue lors de la récupération du statut.",
+        "get_position": "Une erreur est survenue lors de la récupération de la position."
+      },
+      "get_info_data": {
+        "RTC": "Heure RTC.",
+        "Init": "Heure d'initialisation de l'appareil.",
+        "UpTime": "Temps de fonctionnement total (en secondes).",
+        "PWR": "Dernière raison de redémarrage.",
+        "RST": "Nombre total de redémarrages anormaux.",
+        "GPS": "État du récepteur GPS : 0 = ÉTEINT, 2 = ALLUMÉ sans fix, 3 = ALLUMÉ avec fix, 4 = Mode veille, 5 = Surcharge",
+        "SAT": "Satellites utilisés.",
+        "TTFF": "Temps jusqu'au premier fix.",
+        "TTLF": "Temps jusqu'au dernier fix.",
+        "NOGPS": "Temps sans fix GPS (h:min).",
+        "SR": "Nombre d'enregistrements envoyés.",
+        "FG": "Compteur de GPRS échoués.",
+        "FL": "Compteur de liens échoués.",
+        "SMS": "Compteur de SMS envoyés.",
+        "REC": "Enregistrements trouvés – nombre d'enregistrements dans la mémoire.",
+        "MD": "État du mode de données : 0 = Domicile et arrêt, 1 = Domicile et en mouvement, 2 = Itinérance et arrêt, 3 = Itinérance et en mouvement, 4 = Inconnu et arrêt, 5 = Inconnu et en mouvement",
+        "DB": "Valeurs DB : 0 = Carte SD utilisée pour les enregistrements, 1 = RAM Drive utilisée pour les enregistrements"
+      },
+      "get_status_data": {
+        "Link": "Indique la connexion du module au serveur : 0 = Non connecté, 1 = Connecté",
+        "GPRS": "Indique si le GPRS est disponible : 1 = Disponible",
+        "Phone": "État de l'appel vocal : 0 = Prêt, 1 = Indisponible, 2 = Inconnu, 3 = Sonnerie, 4 = Appel en cours, 5 = En veille",
+        "SIM": "État de la carte SIM : 0 = Prêt, 1 = PIN, 2 = PUK, 3 = PIN2, 4 = PUK2",
+        "OP": "Opérateur GSM connecté : ID numérique de l'opérateur",
+        "Signal": "Qualité du signal GSM [0-5]",
+        "NewSMS": "Indique si un nouveau message a été reçu",
+        "Roaming": "0 = Réseau domestique, 1 = Itinérance",
+        "SMSFull": "Stockage des SMS plein ? 0 = OK, 1 = Plein",
+        "LAC": "Code de zone de localisation de la tour GSM",
+        "Cell": "Code d'identification de la cellule de la tour GSM",
+        "NetType": "Type de réseau auquel l'appareil est connecté : 0 = 3G, 1 = GSM, 2 = 4G, 3 = CAT-M1, 4 = CAT-NB1, 99 = Inconnu",
+        "FwUpd": "État de la mise à jour du firmware : 0 = L'appareil a été mis à jour via FOTA WEB / Teltonika Configurator, -65536 = L'appareil n'a pas été mis à jour depuis qu'il a été allumé"
+      },
+      "get_position_data": {
+        "D": "Date de la position",
+        "T": "Heure de la position",
+        "S": "Vitesse actuel",
+        "C": "Latitude et Longitude",
+        "Url": "Lien Google Maps"
+      },
+      "get_immobilizer_info": {
+        "DOUT1": "0 = ÉTEINT, 1 = ALLUMÉ, ? = Ignorer",
+        "DOUT2": "0 = ÉTEINT, 1 = ALLUMÉ, ? = Ignorer",
+        "DOUT3": "0 = ÉTEINT, 1 = ALLUMÉ, ? = Ignorer",
+        "Timeout": "Valeur de timeout pour DOUT1.",
+        "TimeoutY2": "Valeur de timeout pour DOUT2 si nécessaire (en secondes).",
+        "SpeedZ1": "Valeur de vitesse maximale pour DOUT1 si nécessaire.",
+        "SpeedZ2": "Valeur de vitesse maximale pour DOUT2 si nécessaire."
+      },
+      "command_list": {
+        "name_121": "Informations sur l'appareil",
+        "description_121": "Informations en temps réel sur le système de l'appareil",
+
+        "name_212": "Statut du modem",
+        "description_212": "Retourne les informations sur l’état actuel du modem.",
+
+        "name_323": "Anti-démarrage",
+        "description_323": "Active ou désactive le système anti-démarrage pour empêcher l’utilisation non autorisée du véhicule.",
+
+        "name_434": "Vitesse limite",
+        "description_434": "Définit une limite de vitesse pour le véhicule afin d’assurer la sécurité et éviter les excès de vitesse.",
+
+        "name_545": "Position du véhicule",
+        "description_545": "Retourne la position actuelle du véhicule"
+      }
+    },
+    "total_device": {
+      "title": "Modifier le nombre total d'appareils",
+      "label": "Nombre total de devices",
+      "hint": "Veuillez entrer un nombre positif",
+      "cancel": "Annuler",
+      "save": "Enregistrer"
+    }
+  },
+  "company": {
+    "add": "Ajouter",
+    "company_list": "Liste des entreprises",
+    "name": "Nom de l'entreprise",
+    "not_company": "Il n'y a actuellement aucune entreprise enregistrée. Commencez à ajouter des entreprises pour les voir ici.",
+    "email": "Email",
+    "status": "Status",
+    "actif": "Entreprise actif",
+    "inactif": "Entreprise inactif",
+    "all_companies": "Toutes les entreprises",
+    "devices": "Appareils",
+    "device": "appareils",
+    "region": "Région",
+    "update": "Modifier l'information",
+    "details": "Détails de l'emplacement de l'entreprise",
+    "adress": "Adresse",
+    "country": "Pays",
+    "search_company": " Rechercher une entreprise...",
+    "select_country": "Sélectionnez un pays",
+    "cancel": "Annuler",
+    "save": "Enregistrer",
+    "title_suppression": "Mise en inactif de l'entreprise",
+    "delete_company": "Êtes-vous sûr de vouloir rendre cette entreprise inactive ?",
+    "confirmation": "Oui",
+    "refus": "Non",
+    "success_deleting_company": "Entreprise rendue inactive avec succès",
+    "device_count": "Nombre de dispositifs",
+    "title_restoration": "Restauration de l'entreprise",
+    "restoration_company": "Êtes-vous sûr de vouloir rendre active cette entreprise ?",
+    "success_restoring_company": "L'entreprise a été activé avec succès.",
+    "next_table": "Suivant",
+    "previous_table": "Précédent",
+    "have": "Vous avez utilisé",
+    "appareil": "appareil",
+    "update_nbr_device": "Mettre à jour le nombre de dispositifs ",
+    "on": "sur le",
+    "have_2": "disponible",
+    "logo": {
+      "update": "Mettre à jour le logo",
+      "reset": "Annuler",
+      "save": "Enregistrer",
+      "select_file": "Sélectionner un fichier"
+    },
+    "success": {
+      "company_deleted": "L'entreprise a été inactivée",
+      "company_restored": "L'entreprise a été restaurée avec succès"
+    },
+    "error": {
+      "device_limit": "Le nombre dépasse votre limite autorisée.",
+      "loading": "Erreur lors de la récupération de la liste des entreprises",
+      "required_name": "Le nom de l'entreprise est requis.",
+      "maxlength_name": "Le nom de l'entreprise ne peut pas dépasser 150 caractères.",
+      "invalid_email": "Veuillez entrer un email valide.",
+      "maxlength_email": "L'email ne peut pas dépasser 150 caractères.",
+      "maxlength_region": "La région ne peut pas dépasser 150 caractères.",
+      "maxlength_adress": "L'adresse ne peut pas dépasser 250 caractères.",
+      "required_country": "Veuillez sélectionner un pays.",
+      "error_name_company": "L'entreprise est requise.",
+      "email_already_exists": "L'email est déjà utilisé",
+      "error_deleting_company": "Erreur lors de la suppression de l'entreprise.",
+      "required_device_count": "Le nombre de dispositifs est requis.",
+      "min_device_count": "Le nombre de dispositifs doit être au moins de 1.",
+      "error_restore_company": "Une erreur est survenue lors de l'activation  de l'entreprise."
+    }
+  },
+  "phoneNumber": {
+    "codePlaceholder": "Code",
+    "searchPlaceholderLabel": "Recherche",
+    "noEntriesFoundLabel": "Aucun pays trouvé",
+    "nationalNumberLabel": "Numéro de téléphone",
+    "hintLabel": "Sélectionnez un pays et saisissez votre numéro de téléphone",
+    "invalidNumberError": "Le numéro n’est pas valide",
+    "requiredError": "Ce champ est requis"
+  },
+  "user": {
+    "not_user": "Il n'y a actuellement aucun utilisateur enregistré. Commencez à ajouter des utilisateurs pour les voir ici.",
+    "user_list": "Liste des utilisateurs",
+    "add": "Ajouter",
+    "add_admin": "Ajouter admin",
+    "title_admin": "Ajouter un administrateur",
+    "nom": "Nom",
+    "prenom": "Prénom",
+    "username": "Nom d'utilisateur",
+    "status": "Status",
+    "actif": "Actif",
+    "inactif": "Inactif",
+    "all": "Tous les utilisateurs",
+    "all_companies": "Toutes les entreprises",
+    "email": "Email",
+    "entreprise": "Entreprise affiliée",
+    "super_user": "Administrateur ?",
+    "admin_role": "Administrateur",
+    "title_suppression": "Mise en inactif de l'utilisateur",
+    "delete_user": "Êtes-vous sûr de vouloir rendre cet utilisateur inactif ?",
+    "confirmation": "Oui",
+    "refus": "Non",
+    "success_deleting_user": "L'utilisateur a été rendu inactif avec succès.",
+    "title_activation": "Activation d'utilisateur",
+    "activate_user": "Êtes-vous sûr de vouloir activer cet utilisateur ?",
+    "success_activating_user": "L'utilisateur a été activé avec succès.",
+    "success_list_user": "La liste des utilisateurs a été récupérée avec succès.",
+    "next_table": "Suivant",
+    "previous_table": "Précédent",
+    "save": "Enregistrer",
+    "annuler": "Annuler",
+    "add_user": "Ajouter un utilisateur",
+    "edit_user": "Modifier un utilisateur",
+    "success_updating_user": "Utilisateur modifié avec succès.",
+    "success_creating_user": "Utilisateur créé avec succès.",
+    "error_updating_user": "Échec de la modification de l'utilisateur.",
+    "error_creating_user": "Échec de la création de l'utilisateur.",
+    "error_invalid_form": "Veuillez remplir correctement le formulaire.",
+    "success_updating_device_fmap": "Nombre d'appareil mis à jour avec succès.",
+    "error": {
+      "error_name": "Le nom de l'utilisateur est requis",
+      "error_lastname": "Le prénom de l'utilisateur est requis",
+      "error_status": "Le status est requis",
+      "error_email": "Une adresse mail est requise",
+      "error_company": "L'entreprise est requise.",
+      "email_already_exists": "L'email est déjà utilisé",
+      "error_deleting_user": "Une erreur est survenue lors de la mise en inactif de l'utilisateur.",
+      "error_activating_user": "Une erreur est survenue lors de l'activation de l'utilisateur.",
+      "error_list_user": "Erreur lors de la récupération de la liste des utilisateurs.",
+      "company_inactive": "L'entreprise associée est inactive. L'activation n'est pas autorisée.",
+      "company_none": "Veuillez d'abord enregistrer une entreprise.",
+      "device_update_failed": "Erreur lors de la mise à jour du nombre d'appareils."
+    },
+    "column_titles": {
+      "username": "Identifiant",
+      "last_name": "Nom",
+      "first_name": "Prénom",
+      "email": "Email",
+      "statut": "Statut",
+      "company": "Entreprise",
+      "actions": "Actions"
+    },
+    "admin": {
+      "success_creating_admin": "Administrateur créé avec succès.",
+      "error_creating_admin": "Échec de la création de l'administrateur.",
+      "admin_exist": "Un administrateur existe déjà."
+    }
+  },
+  "menu": {
+    "utilisateur": "utilisateur",
+    "entreprise": "entreprise"
+  },
+  "report": {
+    "selectTrip": "Choisir un trajet",
+    "chooseDevice": "Choisissez un appareil",
+    "devicePlaceholder": "Appareils",
+    "period": "Date",
+    "viewTrip": "Voir le trajet",
+    "coordinates": "Détails du trajet",
+    "latitude": "Latitude",
+    "longitude": "Longitude",
+    "intervention_zone": "Afficher la zone : ",
+    "city": "Position :",
+    "speed": "Vitesse :",
+    "kmh": "km/h",
+    "date": "Date :",
+    "noDevice": "Aucun device ajouté",
+    "noTrajectory": "Aucun trajet disponible pour cette date",
+    "noPastTrajectory": "Aucun trajet enregistré pour cet appareil"
+  },
+  "notification": {
+    "typeLabel": "Type de notification",
+    "typeAll": "Tous les types",
+    "typeCritique": "Critique",
+    "typeEleve": "Élevé",
+    "typeMoyen": "Moyen",
+    "typeFaible": "Faible",
+    "dateLabel": "Filtrer par date",
+    "deviceLabel": "Appareil",
+    "deviceAll": "Tous les appareils",
+    "reset": "Réinitialiser",
+    "noResultsMessage": "Aucune notification correspondant à vos filtres",
+    "markAsRead": "Marquer comme lue",
+    "paginatorLabel": "Sélectionner la page",
+    "notification_list": "Liste des notifications",
+    "noDeviceAdded": "Aucun appareil ajouté"
+  },
+  "page404": {
+    "title": "404",
+    "subtitle": "Page introuvable 🧐",
+    "description": "Désolé, la page que vous recherchez n'existe pas, a été déplacée ou est temporairement indisponible.",
+    "button": "⬅ Retour à l'accueil"
+  }
+}

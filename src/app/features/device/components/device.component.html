@@ -1,0 +1,52 @@
+<div class="container-fluid pt-4 px-4">
+  <div class="flex justify-between items-center mb-3 bg-aqua p-2">
+    <h1 class="text-custom-gray ml-5 text-xl">
+      {{ "device.device_list" | translate }}
+      <span *ngIf="isAdminOrSuperUser" class="text-gray-500">
+        ({{ companyName }})
+      </span>
+    </h1>
+
+    <div class="flex items-center ml-3">
+      <button
+        mat-raised-button
+        color="accent"
+        (click)="openModal(true, device!, idDevice!)"
+        *ngIf="canAddDevice && isDeviceAssigned"
+      >
+        {{ "device.add" | translate }}
+      </button>
+    </div>
+
+
+    <div
+      class="flex items-center p-4 rounded-lg bg-[#ffe5e6] border border-[#ffb3b4] text-[#ff4649]"
+      *ngIf="isLoadDevice && !canAddDevice"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="w-6 h-6 mr-3"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20 10 10 0 000-20z"
+        />
+      </svg>
+      <span class="text-sm">
+        {{ "device.max_device_info" | translate }}
+      </span>
+    </div>
+  </div>
+
+  <app-table-device
+    [rowData]="rowData"
+    (rowsSelected)="handleRowsSelected($event)"
+    (dataChanged)="saveNewDevice($event)"
+    (totalCompany)="handleTotalCompany($event)"
+  ></app-table-device>
+</div>

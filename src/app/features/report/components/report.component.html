@@ -1,0 +1,69 @@
+<mat-drawer-container autosize>
+  <div style="height: 94vh; overflow: initial" class="div-upload" appDnd>
+    <div #ol_map_report id="ol_map_report" class="map"></div>
+    <div style="display: none">
+      <a
+        class="overlay"
+        id="vienna"
+        target="_blank"
+        href="https://en.wikipedia.org/wiki/Vienna"
+        >Vienna</a
+      >
+      <div id="marker" title="Marker"></div>
+      <!-- Popup -->
+      <div id="popup"></div>
+    </div>
+
+    <div class="utils">
+      <div class="zooms" id="zooms">
+        <div id="plus">
+          <i class="fa fa-plus fa-xs"></i>
+        </div>
+        <div id="moins">
+          <i class="fa fa-minus fa-xs"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="report-menu">
+      <button
+        mat-button
+        (click)="viewReportDetail()"
+        class="flex items-center gap-2"
+      >
+        <mat-icon>arrow_back</mat-icon>
+        <span>{{ "report.selectTrip" | translate }}</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="absolute bottom-2">
+    <div class="flex justify-center items-center" style="margin-left: 20px">
+      <div
+        *ngFor="let baseMap of imageBaseMap"
+        (click)="switchBaseMap(baseMap)"
+        style="margin-left: 7px"
+        class="cursor-pointer hover:opacity-75 transition-opacity"
+      >
+        <div class="">
+          <img
+            [src]="baseMap.urlImage"
+            [alt]="baseMap.nom"
+            class="w-16 h-16 object-cover rounded"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    *ngIf="coordinates"
+    class="absolute bottom-2 right-3 p-3 bg-black bg-opacity-60 text-white rounded-lg shadow-lg flex items-center space-x-2"
+  >
+    <p class="text-sm">
+      <strong>{{ "report.latitude" | translate }}:</strong>
+      {{ coordinates.lat }} |
+      <strong>{{ "report.longitude" | translate }}:</strong>
+      {{ coordinates.lng }}
+    </p>
+  </div>
+</mat-drawer-container>

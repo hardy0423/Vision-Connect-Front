@@ -1,0 +1,75 @@
+<mat-drawer-container autosize>
+  <div style="height: 70vh; overflow: initial" class="div-upload" appDnd>
+    <div #ol_map id="ol_map" class="map"></div>
+    <div class="utils">
+      <div class="zooms" id="zooms">
+        <div id="plus">
+          <i class="fa fa-plus fa-xs"></i>
+        </div>
+        <div id="moins">
+          <i class="fa fa-minus fa-xs"></i>
+        </div>
+      </div>
+    </div>
+
+    <div
+      *ngIf="coordinatesDraw"
+      class="absolute bottom-2 left-3 p-3 bg-black bg-opacity-60 text-white rounded-lg shadow-lg flex items-center space-x-2"
+    >
+      <p class="text-sm">
+        <strong>{{ "report.latitude" | translate }}:</strong>
+        {{ coordinatesDraw.lat }} |
+        <strong>{{ "report.longitude" | translate }}:</strong>
+        {{ coordinatesDraw.lng }}
+      </p>
+    </div>
+    <div class="buttons" *ngIf="!saveZoneSuccess">
+      <!-- Uncomment this code if we want to add the functionality to delete a polygon in the database -->
+      <!-- <ng-container *ngIf="isSelectedZone">
+                <button class="delete-zone" color="danger" (click)="deletePolygone(interventionZoneIdValue)">
+                    {{"map.update_polygon" | translate}}
+                </button>
+            </ng-container> -->
+
+      <div *ngIf="!showEditButton; else elseTemplate">
+        <button
+          class="update-zone"
+          matTooltip="{{ 'map.edit_polygon' | translate }}"
+          (click)="onUpdateInterventionZoneInstance(interventionZoneIdValue)"
+        >
+          <mat-icon class="icon-editzone">edit</mat-icon>
+        </button>
+      </div>
+      <ng-template #elseTemplate>
+        <button
+          *ngIf="!isPolygonDrawn"
+          class="draw-zone"
+          matTooltip="{{ 'map.draw_polygon' | translate }}"
+          (click)="onDrawLineInstance()"
+        >
+          <mat-icon class="icon-drawzone" svgIcon="custom_polygon"></mat-icon>
+        </button>
+
+        <button
+          class="delete-zone"
+          *ngIf="isPolygonDrawn"
+          matTooltip="{{ 'map.update_polygon' | translate }}"
+          (click)="onCleanMapInstance()"
+        >
+          <mat-icon class="icon-deletezone">delete_outline</mat-icon>
+        </button>
+
+        <button
+          disabled
+          *ngIf="isPolygonDrawn"
+          matTooltip="{{ 'map.save_polygon' | translate }}"
+          class="save-zone"
+        >
+          <mat-icon class="icon-savezone" style="font-size: 40px"
+            >save</mat-icon
+          >
+        </button>
+      </ng-template>
+    </div>
+  </div>
+</mat-drawer-container>
